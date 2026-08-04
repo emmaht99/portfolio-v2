@@ -1,7 +1,11 @@
+type ContentSectionVariant = "challenge" | "process" | "outcome";
+
 type ContentSectionProps = {
   heading: string;
   content: string;
   headingLevel?: "h2" | "h3";
+  variant?: ContentSectionVariant;
+  kicker?: string;
 };
 
 const SUBHEADING_MAX_LENGTH = 30;
@@ -18,23 +22,51 @@ export default function ContentSection({
   heading,
   content,
   headingLevel = "h2",
+  variant = "process",
+  kicker,
 }: ContentSectionProps) {
   const Heading = headingLevel;
-  const chunks = content.split("\n\n").filter((chunk) => chunk.trim().length > 0);
+  const chunks = content
+    .split("\n\n")
+    .filter((chunk) => chunk.trim().length > 0);
+
+  const useLede = variant === "challenge" || variant === "outcome";
+  const subheadingColor =
+    variant === "process" ? "text-accent" : "text-ink";
 
   return (
-    <section className="flex flex-col gap-6">
+    <section
+      className={`flex flex-col gap-6 ${
+        variant === "outcome" ? "border-t border-neutral/20 pt-8" : ""
+      }`}
+    >
+      {kicker ? (
+        <p className="text-meta text-neutral">
+          {kicker} — {heading}
+        </p>
+      ) : null}
       <Heading className="font-display text-h2 text-ink">{heading}</Heading>
       <div className="flex flex-col gap-4">
-        {chunks.map((chunk, index) =>
-          isSubheading(chunk) ? (
-            <h3 key={index} className="font-display text-h3 text-ink">
+        {chunks.map((chunk, index) => {
+          if (isSubheading(chunk)) {
+            return (
+              <h3
+                key={index}
+                className={`font-display text-h3 ${subheadingColor}`}
+              >
+                {chunk}
+              </h3>
+            );
+          }
+
+          const isLede = useLede && index === 0;
+
+          return (
+            <p key={index} className={isLede ? "text-h3" : undefined}>
               {chunk}
-            </h3>
-          ) : (
-            <p key={index}>{chunk}</p>
-          ),
-        )}
+            </p>
+          );
+        })}
       </div>
     </section>
   );
