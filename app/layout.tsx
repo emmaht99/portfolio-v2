@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, DM_Sans } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const libreBaskerville = Libre_Baskerville({
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <SiteHeader />
         {children}
+        <Footer />
       </body>
     </html>
   );
