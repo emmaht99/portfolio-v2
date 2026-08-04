@@ -46,7 +46,12 @@ export const projects: Project[] = [
     year: 2024,
     description:
       "A redesign of Dansk Stalking Center's Skytsengel app, transforming it from a safety tool into a broader support ecosystem for people experiencing stalking.",
-  
+
+    coverImage: {
+      src: "/projects/skytsengel/mockup.png",
+      alt: "Mockup of the redesigned Skytsengel app interface",
+    },
+
     role:
       "UX Researcher and Designer. In a team of five, I contributed across all parts of the project, with a primary focus on planning and conducting user interviews, qualitative analysis, concept development, and Figma prototyping.",
   
@@ -79,7 +84,24 @@ export const projects: Project[] = [
     outcome:
       "The final concept shifted Skytsengel from primarily being an emergency tool into a support ecosystem focused on three areas: emotional support, knowledge about stalking, and safe community connection.\n\nThe redesigned concept included daily supportive content, mindfulness exercises, educational resources, moderated support groups, professional guidance, and improved incident documentation.\n\nThe prototype was presented to Dansk Stalking Center, who responded positively and highlighted that a solution like this could be valuable for supporting people affected by stalking.\n\nThe project taught me the importance of precision and care when designing for sensitive situations. With more time, I would continue by testing the prototype with users and refining the functionality of the final product.",
 
-    images: [],
+    images: [
+      {
+        src: "/projects/skytsengel/Home copy.png",
+        alt: "Skytsengel app home screen design",
+      },
+      {
+        src: "/projects/skytsengel/Landing Page copy.png",
+        alt: "Skytsengel app landing page design",
+      },
+      {
+        src: "/projects/skytsengel/interview info.png",
+        alt: "Summary of insights from user interviews conducted for the Skytsengel project",
+      },
+      {
+        src: "/projects/skytsengel/processmodel.png",
+        alt: "Process model outlining the Skytsengel design research and development stages",
+      },
+    ],
   },
   {
     title: "Caritas Fællesskab",
@@ -88,6 +110,10 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "Caritas Fællesskab is a digital platform concept created for Caritas Danmark, exploring how technology can support senior communities while respecting existing social practices and individual needs.",
+    coverImage: {
+      src: "/projects/caritas-faellesskab/caritas fron page.png",
+      alt: "Front page of the Caritas Fællesskab digital platform prototype",
+    },
     role:
       "UX and Product Designer. Working together with one thesis partner, I contributed equally across research, design, analysis, workshop facilitation, concept development, and prototyping.",
     context:
@@ -116,7 +142,12 @@ export const projects: Project[] = [
       "The outcome was a set of six design guidelines for a unified digital platform: fostering connection, supporting rather than replacing activities, ensuring accessibility, enabling personalization, providing timely communication, and creating spaces for member interaction.\n\nTo demonstrate how these principles could be applied, we created Caritas Fællesskab — a clickable Figma prototype for a digital community platform. The prototype was presented to Caritas Danmark and members of the senior communities, receiving very positive feedback. Caritas is currently exploring the possibility of deploying the concept in the future.\n\nA key learning from the project was the importance of designing with communities rather than simply designing for them. The project strengthened my understanding of participatory design, ethical research, and creating technology that respects existing human connections.",
     prototypeLink:
       "https://www.figma.com/proto/mPl1AkUoDNWE7stMJSiN8K/Caritas-App?node-id=1-6&starting-point-node-id=1%3A6&t=8yJBzKvtpItpY2gV-1",
-    images: [],
+    images: [
+      {
+        src: "/projects/caritas-faellesskab/Fællesskab Workshop Dansk.png",
+        alt: "Materials from the Caritas Fællesskab co-design workshop, conducted in Danish",
+      },
+    ],
   },
   {
     title: "Deichman Wrapped",
@@ -125,6 +156,10 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "Deichman Wrapped is a self-initiated product concept exploring how public libraries can create more engaging digital experiences. Inspired by Spotify Wrapped, the project transforms library activity into a playful and personalized year-in-review experience.",
+    coverImage: {
+      src: "/projects/deichman-wrapped/research.png",
+      alt: "Research overview for the Deichman Wrapped project",
+    },
     role:
       "Product Designer & AI-Assisted Prototyper. I led the project from concept development and research to UX design, prototyping, and building a functional demo experience using AI-assisted tools.",
     context:
