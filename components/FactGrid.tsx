@@ -36,11 +36,11 @@ export default function FactGrid({
   if (facts.length === 0) return null;
 
   return (
-    <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <dl className="flex flex-col divide-y divide-neutral/20 border-y border-neutral/20 sm:flex-row sm:divide-x sm:divide-y-0">
       {facts.map((fact) => (
-        <div key={fact.label} className="flex flex-col gap-1">
+        <div key={fact.label} className="flex flex-col gap-1 py-3 sm:flex-1 sm:px-6 sm:py-4">
           <dt className="text-meta text-neutral">{fact.label}</dt>
-          <dd>{fact.value}</dd>
+          <dd className="text-meta">{fact.value}</dd>
         </div>
       ))}
     </dl>

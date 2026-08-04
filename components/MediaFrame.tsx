@@ -5,11 +5,19 @@ type MediaFrameProps = {
   image?: ProjectImage;
 };
 
+const aspectBySize: Record<NonNullable<ProjectImage["size"]>, string> = {
+  hero: "aspect-[21/9]",
+  large: "aspect-[3/2]",
+  standard: "aspect-[4/3]",
+};
+
 export default function MediaFrame({ image }: MediaFrameProps) {
+  const aspectClass = aspectBySize[image?.size ?? "standard"];
+
   return (
     <figure className="flex flex-col gap-2">
       {image ? (
-        <div className="relative aspect-[4/3] overflow-hidden bg-neutral/10">
+        <div className={`relative overflow-hidden bg-neutral/10 ${aspectClass}`}>
           <Image
             src={image.src}
             alt={image.alt}
@@ -19,7 +27,7 @@ export default function MediaFrame({ image }: MediaFrameProps) {
           />
         </div>
       ) : (
-        <div className="aspect-[4/3] bg-neutral/10" aria-hidden="true" />
+        <div className={`bg-neutral/10 ${aspectClass}`} aria-hidden="true" />
       )}
 
       {image?.caption ? (

@@ -17,6 +17,9 @@ export interface ProjectImage {
   src: string;
   alt: string;
   caption?: string;
+  section?: "challenge" | "process" | "outcome";
+  size?: "hero" | "large" | "standard";
+  group?: string;
 }
 
 export interface Project {
@@ -50,6 +53,7 @@ export const projects: Project[] = [
     coverImage: {
       src: "/projects/skytsengel/mockup.png",
       alt: "Mockup of the redesigned Skytsengel app interface",
+      size: "hero",
     },
 
     role:
@@ -86,20 +90,30 @@ export const projects: Project[] = [
 
     images: [
       {
-        src: "/projects/skytsengel/Home copy.png",
-        alt: "Skytsengel app home screen design",
-      },
-      {
-        src: "/projects/skytsengel/Landing Page copy.png",
-        alt: "Skytsengel app landing page design",
-      },
-      {
         src: "/projects/skytsengel/interview info.png",
         alt: "Summary of insights from user interviews conducted for the Skytsengel project",
+        section: "process",
+        size: "large",
       },
       {
         src: "/projects/skytsengel/processmodel.png",
         alt: "Process model outlining the Skytsengel design research and development stages",
+        section: "process",
+        size: "large",
+      },
+      {
+        src: "/projects/skytsengel/Home copy.png",
+        alt: "Home screen of the final Skytsengel prototype",
+        section: "outcome",
+        size: "standard",
+        group: "Prototype screens",
+      },
+      {
+        src: "/projects/skytsengel/Landing Page copy.png",
+        alt: "Landing screen shown when first opening the Skytsengel prototype",
+        section: "outcome",
+        size: "standard",
+        group: "Prototype screens",
       },
     ],
   },
@@ -113,6 +127,7 @@ export const projects: Project[] = [
     coverImage: {
       src: "/projects/caritas-faellesskab/caritas fron page.png",
       alt: "Front page of the Caritas Fællesskab digital platform prototype",
+      size: "hero",
     },
     role:
       "UX and Product Designer. Working together with one thesis partner, I contributed equally across research, design, analysis, workshop facilitation, concept development, and prototyping.",
@@ -146,6 +161,8 @@ export const projects: Project[] = [
       {
         src: "/projects/caritas-faellesskab/Fællesskab Workshop Dansk.png",
         alt: "Materials from the Caritas Fællesskab co-design workshop, conducted in Danish",
+        section: "process",
+        size: "large",
       },
     ],
   },
@@ -159,6 +176,7 @@ export const projects: Project[] = [
     coverImage: {
       src: "/projects/deichman-wrapped/research.png",
       alt: "Research overview for the Deichman Wrapped project",
+      size: "hero",
     },
     role:
       "Product Designer & AI-Assisted Prototyper. I led the project from concept development and research to UX design, prototyping, and building a functional demo experience using AI-assisted tools.",
