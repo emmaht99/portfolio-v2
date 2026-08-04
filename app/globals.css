@@ -50,6 +50,7 @@
   /* Fonts */
   --font-display: var(--font-libre-baskerville);
   --font-sans: var(--font-dm-sans);
+  --font-handwritten: var(--font-caveat);
 
   /* Typography scale */
   --text-display: var(--text-display-size);
@@ -70,4 +71,11 @@ body {
   background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+.text-halo {
+  text-shadow:
+    0 0 6px var(--color-canvas),
+    0 0 6px var(--color-canvas),
+    0 0 10px var(--color-canvas);
 }

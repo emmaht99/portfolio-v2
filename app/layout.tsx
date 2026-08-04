@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Libre_Baskerville, DM_Sans } from "next/font/google";
+import { Libre_Baskerville, DM_Sans, Caveat } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -18,6 +18,13 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["600"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Emma H. Tandle — UX & Product Designer",
   description:
@@ -28,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${libreBaskerville.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${libreBaskerville.variable} ${dmSans.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SiteHeader />
