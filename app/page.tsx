@@ -32,7 +32,7 @@ export default function Home() {
       <header className="w-full">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
           <div className="flex flex-col gap-4">
-            <p className="-rotate-1 font-handwritten text-xl text-highlight">
+            <p className="-ml-6 -rotate-3 font-handwritten text-xl text-highlight">
               I design digital experiences that connect people, communities,
               and technology.
             </p>
@@ -59,21 +59,8 @@ export default function Home() {
           </div>
 
           <div className="relative flex flex-col gap-6">
-            <p className="flex flex-wrap items-baseline gap-x-2 font-sans text-lg text-ink">
-              {"Hi my name is Emma and I am a".split(" ").map((word, i, arr) => {
-                const t = (i - (arr.length - 1) / 2) / ((arr.length - 1) / 2);
-                return (
-                  <span
-                    key={i}
-                    className="inline-block"
-                    style={{
-                      transform: `rotate(${(t * 12).toFixed(2)}deg) translateY(${(t * t * 14).toFixed(2)}px)`,
-                    }}
-                  >
-                    {word}
-                  </span>
-                );
-              })}
+            <p className="font-sans text-lg text-ink">
+              Hi my name is Emma and I am a
             </p>
 
             <h1 className="font-display text-h1 italic text-ink">
@@ -84,7 +71,7 @@ export default function Home() {
 
             <div>
               <Button href="/contact" className="rounded-full">
-                Contact<span aria-hidden="true"> ↗</span>
+                Contact
               </Button>
             </div>
 
