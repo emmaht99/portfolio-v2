@@ -8,6 +8,7 @@ const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
   subsets: ["latin"],
   weight: ["400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 

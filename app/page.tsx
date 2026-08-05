@@ -26,18 +26,42 @@ export default function Home() {
               priority
               className="object-cover"
             />
-          </div>
-
-          <div className="relative flex flex-col gap-6">
-            <p className="text-meta text-neutral">UX & Product Designer</p>
-            <h1 className="font-display text-h1 text-ink">
-              Hi, I&apos;m Emma
-            </h1>
-            <p className="max-w-md">
+            <p className="text-halo absolute left-4 top-4 max-w-[80%] -rotate-2 font-handwritten text-xl text-ink">
               I design digital experiences that connect people, communities,
               and technology.
             </p>
+          </div>
+
+          <div className="relative flex flex-col gap-6">
+            <p className="flex flex-wrap items-baseline gap-x-2 font-sans text-lg text-ink">
+              {"Hi my name is Emma and I am a".split(" ").map((word, i, arr) => {
+                const t = (i - (arr.length - 1) / 2) / ((arr.length - 1) / 2);
+                return (
+                  <span
+                    key={i}
+                    className="inline-block"
+                    style={{
+                      transform: `rotate(${(t * 12).toFixed(2)}deg) translateY(${(t * t * 14).toFixed(2)}px)`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                );
+              })}
+            </p>
+
+            <h1 className="font-display text-h1 italic text-ink">
+              UX &amp; Product Designer
+            </h1>
+
             <p className="max-w-md">Welcome to my portfolio!</p>
+
+            <div>
+              <Button href="/contact" className="rounded-full">
+                Contact<span aria-hidden="true"> ↗</span>
+              </Button>
+            </div>
+
             <p className="font-handwritten -rotate-2 self-end text-2xl text-highlight">
               scroll down to see my work
             </p>
