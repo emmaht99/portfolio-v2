@@ -17,9 +17,9 @@ export default function Home() {
     <main className="flex flex-col gap-16 pb-16">
       <header className="w-full">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
-          <div className="relative aspect-[3/4] overflow-hidden">
+          <div className="relative aspect-[2/3] overflow-hidden shadow-md">
             <Image
-              src="/home/emma-louisiana.jpg"
+              src="/home/emma-louisiana.png"
               alt="Emma standing in a gallery, looking at a sculpture beside a wall of windows overlooking trees"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"

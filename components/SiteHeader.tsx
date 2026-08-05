@@ -76,7 +76,7 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-canvas">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 md:justify-center">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-6 md:justify-center">
         <nav aria-label="Primary">
           <ul className="flex items-center gap-2 md:gap-10">
             <li>
@@ -92,7 +92,7 @@ export default function SiteHeader() {
               <Link
                 href="/"
                 aria-label="Emma H. Tandle — Home"
-                className="inline-flex min-h-11 items-center font-display text-lg text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-h3"
+                className="inline-flex min-h-11 items-center font-display text-lg text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-h3"
               >
                 Emma H. Tandle
               </Link>
