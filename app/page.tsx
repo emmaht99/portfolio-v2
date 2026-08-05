@@ -6,6 +6,20 @@ import { projects } from "@/lib/projects";
 
 const featuredSlugs = ["skytsengel", "caritas-faellesskab", "deichman-wrapped"];
 
+function Sparkle({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        d="M12 2 L14 9 L21 11 L14 13 L12 21 L10 13 L3 11 L10 9 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Home() {
   const featuredProjects = featuredSlugs
     .map((slug) => projects.find((project) => project.slug === slug))
@@ -17,19 +31,31 @@ export default function Home() {
     <main className="flex flex-col gap-16 pb-16">
       <header className="w-full">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
-          <div className="relative aspect-[2/3] overflow-hidden shadow-md">
-            <Image
-              src="/home/emma-louisiana.png"
-              alt="Emma standing in a gallery, looking at a sculpture beside a wall of windows overlooking trees"
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              priority
-              className="object-cover"
-            />
-            <p className="text-halo absolute left-4 top-4 max-w-[80%] -rotate-2 font-handwritten text-xl text-ink">
+          <div className="flex flex-col gap-4">
+            <p className="-rotate-1 font-handwritten text-xl text-highlight">
               I design digital experiences that connect people, communities,
               and technology.
             </p>
+
+            <div className="relative aspect-[2/3] shadow-md">
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src="/home/emma-louisiana.png"
+                  alt="Emma standing in a gallery, looking at a sculpture beside a wall of windows overlooking trees"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  priority
+                  className="object-cover"
+                />
+              </div>
+
+              <Sparkle className="absolute -left-2 -top-2 h-9 w-9 rotate-3 text-highlight" />
+              <Sparkle className="absolute left-7 -top-1 h-5 w-5 -rotate-6 text-highlight" />
+
+              <Sparkle className="absolute -bottom-3 -right-2 h-9 w-9 -rotate-6 text-highlight" />
+              <Sparkle className="absolute bottom-6 right-9 h-6 w-6 rotate-12 text-highlight" />
+              <Sparkle className="absolute bottom-1 right-16 h-4 w-4 -rotate-3 text-highlight" />
+            </div>
           </div>
 
           <div className="relative flex flex-col gap-6">
