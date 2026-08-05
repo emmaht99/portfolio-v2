@@ -5,7 +5,7 @@
   --canvas: #f7f4ef; /* warm ivory */
   --ink: #16233a; /* deep navy */
   --accent: #3e6fa6; /* sky blue */
-  --highlight: #c8654f; /* muted coral — large text / non-text emphasis only, see note below */
+  --highlight: #ff1493; /* hot pink — large text / non-text emphasis only, see note below */
   --neutral: #6b6459; /* warm gray */
 
   /* Typography tokens — mobile-first base sizes (REDESIGN_STRATEGY.md scale) */

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/Button";
 import TextLink from "@/components/TextLink";
 import ProjectCard from "@/components/ProjectCard";
@@ -14,18 +15,32 @@ export default function Home() {
 
   return (
     <main className="flex flex-col gap-16 pb-16">
-      <header className="w-full border-b border-neutral/20">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-24 sm:py-32">
-          <p className="text-meta text-neutral">UX & Product Designer</p>
-          <h1 className="max-w-3xl font-display text-display text-ink">
-            Designing digital experiences that connect people, communities,
-            and technology.
-          </h1>
-          <div className="flex flex-wrap gap-4 pt-2">
-            <Button href="/work">View work</Button>
-            <Button href="/contact" variant="secondary">
-              Contact
-            </Button>
+      <header className="w-full">
+        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+          <div className="relative aspect-[3/4] overflow-hidden">
+            <Image
+              src="/home/emma-louisiana.jpg"
+              alt="Emma standing in a gallery, looking at a sculpture beside a wall of windows overlooking trees"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              priority
+              className="object-cover"
+            />
+          </div>
+
+          <div className="relative flex flex-col gap-6">
+            <p className="text-meta text-neutral">UX & Product Designer</p>
+            <h1 className="font-display text-h1 text-ink">
+              Hi, I&apos;m Emma
+            </h1>
+            <p className="max-w-md">
+              I design digital experiences that connect people, communities,
+              and technology.
+            </p>
+            <p className="max-w-md">Welcome to my portfolio!</p>
+            <p className="font-handwritten -rotate-2 self-end text-2xl text-highlight">
+              scroll down to see my work
+            </p>
           </div>
         </div>
       </header>
