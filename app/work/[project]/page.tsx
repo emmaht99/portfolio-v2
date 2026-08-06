@@ -76,6 +76,14 @@ export default async function Page(props: PageProps<"/work/[project]">) {
         />
       ))}
 
+      {project.sketchbook ? (
+        <div className="mx-auto w-full max-w-5xl px-4">
+          <p className="text-halo w-fit -rotate-1 font-handwritten text-2xl text-highlight">
+            crossing my fingers that this will exist in the future! 🤞
+          </p>
+        </div>
+      ) : null}
+
       {unassignedImages.length > 0 ? (
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4">
           <h2 className="font-display text-h2 text-ink">Additional images</h2>

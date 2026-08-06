@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/Button";
-import { Arrow, Circle, Sparkle } from "@/components/Doodles";
+import { Book, Circle, Sparkle, Squiggle } from "@/components/Doodles";
 import type { Project } from "@/lib/projects";
 
 type CaseStudyHeroProps = {
@@ -13,25 +13,35 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
   if (heroImage) {
     return (
       <header className="w-full border-b border-neutral/20">
-        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+        <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+          <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
+
           <div className="flex flex-col gap-6">
             <h1 className="font-display text-h1 text-ink">{title}</h1>
             {description ? <p className="max-w-md">{description}</p> : null}
             {prototypeLink ? (
-              <div>
+              <div className="relative inline-flex w-fit flex-col">
                 <Button href={prototypeLink} external className="rounded-full">
                   View live prototype
                 </Button>
+                <p className="text-halo absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
+                  try it out!
+                </p>
+                <Squiggle
+                  variant={2}
+                  className="absolute -bottom-9 left-1/2 h-3 w-28 -translate-x-1/2 rotate-2 text-highlight"
+                />
               </div>
             ) : null}
           </div>
 
-          <div className="relative mx-auto w-full max-w-xs pt-10">
-            <p className="text-halo absolute -top-2 right-4 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
-              the final experience
-            </p>
-            <Circle className="pointer-events-none absolute -top-6 right-0 h-11 w-52 -rotate-2 text-highlight" />
-            <Arrow className="pointer-events-none absolute -top-1 right-16 h-10 w-10 rotate-45 text-highlight" />
+          <div className="relative mx-auto w-full max-w-xs pt-12">
+            <div className="absolute -top-11 right-2 flex h-20 w-48 items-center justify-center">
+              <Circle className="pointer-events-none absolute inset-0 h-full w-full text-highlight" />
+              <p className="text-halo relative -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
+                a sneak peek
+              </p>
+            </div>
 
             <div className="relative aspect-square w-full">
               <Image

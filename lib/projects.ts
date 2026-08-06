@@ -18,6 +18,7 @@ export interface ProjectImage {
   alt: string;
   caption?: string;
   annotation?: string;
+  annotationIcon?: "book" | "lightbulb";
   section?: "challenge" | "process" | "outcome";
   size?: "hero" | "large" | "standard" | "wide" | "square";
   group?: string;
@@ -226,7 +227,7 @@ export const projects: Project[] = [
         alt: "Deichman's wayfinding icon system used across its libraries",
         caption: "Deichman's wayfinding icon system",
         section: "challenge",
-        size: "standard",
+        size: "square",
         group: "Existing Deichman identity",
       },
       {
@@ -235,15 +236,9 @@ export const projects: Project[] = [
         caption:
           "Mapping similar year-in-review formats and brainstorming what a library version could show",
         annotation: "the brainstorm",
+        annotationIcon: "lightbulb",
         section: "process",
         size: "large",
-      },
-      {
-        src: "/projects/deichman-wrapped/landing-screen.png",
-        alt: "Early concept screen for Deichman Wrapped, showing the app name and a call to sign in",
-        caption: "An early concept for the entry screen",
-        section: "process",
-        size: "square",
       },
     ],
   },

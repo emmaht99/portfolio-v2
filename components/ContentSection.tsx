@@ -1,6 +1,12 @@
-import { Squiggle } from "@/components/Doodles";
+import { Loop, Squiggle } from "@/components/Doodles";
 
 type ContentSectionVariant = "challenge" | "process" | "outcome";
+
+const squiggleVariantByType: Record<ContentSectionVariant, 1 | 2 | 3> = {
+  challenge: 1,
+  process: 2,
+  outcome: 3,
+};
 
 type ContentSectionProps = {
   heading: string;
@@ -40,10 +46,14 @@ export default function ContentSection({
 
   return (
     <section
-      className={`flex flex-col gap-6 ${
+      className={`relative flex flex-col gap-6 ${
         variant === "outcome" ? "border-t border-neutral/20 pt-8" : ""
       }`}
     >
+      {sketchbook && variant === "process" ? (
+        <Loop className="pointer-events-none absolute left-[-4.5rem] top-[73%] hidden h-14 w-14 -translate-y-1/2 text-highlight lg:block" />
+      ) : null}
+
       {kicker ? (
         <p className="text-meta text-neutral">
           {kicker} — {heading}
@@ -51,7 +61,10 @@ export default function ContentSection({
       ) : null}
       <Heading className="font-display text-h2 text-ink">{heading}</Heading>
       {sketchbook ? (
-        <Squiggle className="-mt-2 h-3 w-32 text-highlight" />
+        <Squiggle
+          variant={squiggleVariantByType[variant]}
+          className="-mt-2 h-3 w-32 text-highlight"
+        />
       ) : null}
       <div className="flex flex-col gap-4">
         {chunks.map((chunk, index) => {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Book, Lightbulb } from "@/components/Doodles";
 import type { ProjectImage } from "@/lib/projects";
 
 type MediaFrameProps = {
@@ -16,8 +17,16 @@ const aspectBySize: Record<NonNullable<ProjectImage["size"]>, string> = {
 const frameClasses =
   "relative overflow-hidden border border-neutral/20 bg-neutral/10 shadow-sm";
 
+const annotationIcons = {
+  book: Book,
+  lightbulb: Lightbulb,
+};
+
 export default function MediaFrame({ image }: MediaFrameProps) {
   const aspectClass = aspectBySize[image?.size ?? "standard"];
+  const AnnotationIcon = image?.annotationIcon
+    ? annotationIcons[image.annotationIcon]
+    : null;
 
   return (
     <figure className="flex flex-col gap-2">
@@ -31,9 +40,14 @@ export default function MediaFrame({ image }: MediaFrameProps) {
             className="object-cover"
           />
           {image.annotation ? (
-            <p className="text-halo absolute left-3 top-3 -rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
-              {image.annotation}
-            </p>
+            <div className="absolute left-3 top-3 flex items-center gap-1.5">
+              {AnnotationIcon ? (
+                <AnnotationIcon className="h-6 w-6 -rotate-6 text-highlight" />
+              ) : null}
+              <p className="text-halo -rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
+                {image.annotation}
+              </p>
+            </div>
           ) : null}
         </div>
       ) : (
