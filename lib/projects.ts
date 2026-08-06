@@ -185,8 +185,8 @@ export const projects: Project[] = [
     description:
       "Deichman Wrapped is a self-initiated product concept exploring how public libraries can create more engaging digital experiences. Inspired by Spotify Wrapped, the project transforms library activity into a playful and personalized year-in-review experience.",
     coverImage: {
-      src: "/projects/deichman-wrapped/landing-screen.png",
-      alt: "Mockup of the Deichman Wrapped entry screen on a phone",
+      src: "/projects/deichman-wrapped/cover.png",
+      alt: "Deichman Wrapped title card reading “Ditt år i bøker” over a warm gradient background",
     },
     heroImage: {
       src: "/projects/deichman-wrapped/hero-collage.png",
@@ -222,7 +222,7 @@ export const projects: Project[] = [
         src: "/projects/deichman-wrapped/brand-posters.png",
         alt: "Existing Deichman library campaign posters, each addressed to a different reader",
         caption: "Deichman's existing “Kjære …” campaign posters",
-        section: "challenge",
+        section: "process",
         size: "wide",
         group: "Existing Deichman identity",
       },
@@ -230,7 +230,7 @@ export const projects: Project[] = [
         src: "/projects/deichman-wrapped/brand-icons.png",
         alt: "Deichman's wayfinding icon system used across its libraries",
         caption: "Deichman's wayfinding icon system",
-        section: "challenge",
+        section: "process",
         size: "square",
         group: "Existing Deichman identity",
       },
@@ -245,7 +245,6 @@ export const projects: Project[] = [
             icon: "lightbulb",
             size: "xl",
             className: "top-2 left-2 -rotate-2",
-            arrowClassName: "top-14 left-12 h-7 w-7 rotate-[145deg]",
           },
           {
             text: "familiar branding",
