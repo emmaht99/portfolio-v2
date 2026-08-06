@@ -5,6 +5,7 @@ import CaseStudySection from "@/components/CaseStudySection";
 import MediaFrame from "@/components/MediaFrame";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import InterviewPanel from "@/components/InterviewPanel";
+import GuidelineList from "@/components/GuidelineList";
 import Scribble from "@/components/Scribble";
 import { projects, type ProjectImage } from "@/lib/projects";
 
@@ -95,6 +96,12 @@ export default async function Page(props: PageProps<"/work/[project]">) {
           {section.variant === "process" && project.processFindings ? (
             <div className="mx-auto w-full max-w-5xl px-4">
               <p>{project.processFindings}</p>
+            </div>
+          ) : null}
+
+          {section.variant === "outcome" && project.guidelines ? (
+            <div className="mx-auto w-full max-w-5xl px-4">
+              <GuidelineList items={project.guidelines} />
             </div>
           ) : null}
         </div>

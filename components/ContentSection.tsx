@@ -1,5 +1,7 @@
 import { Fragment, type ReactNode } from "react";
 import { Loop } from "@/components/Doodles";
+import HandwrittenUnderline from "@/components/HandwrittenUnderline";
+import MediaFrame from "@/components/MediaFrame";
 import MediaGroup from "@/components/MediaGroup";
 import type { ProjectImage } from "@/lib/projects";
 
@@ -24,6 +26,19 @@ function isSubheading(chunk: string): boolean {
   if (chunk.includes("\n")) return false;
   const lastChar = chunk.charAt(chunk.length - 1);
   return !SENTENCE_ENDINGS.includes(lastChar);
+}
+
+// Marking text with ==like this== in project copy renders it with a
+// handwritten pink underline, for calling out a single key phrase.
+function renderWithHighlights(text: string): ReactNode[] {
+  const parts = text.split(/==(.+?)==/g);
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <HandwrittenUnderline key={index}>{part}</HandwrittenUnderline>
+    ) : (
+      part
+    ),
+  );
 }
 
 export default function ContentSection({
@@ -81,10 +96,30 @@ export default function ContentSection({
             precedingChunk && isSubheading(precedingChunk)
               ? mediaAfterHeading?.[precedingChunk]
               : undefined;
+          const pairedImage =
+            inlineImages?.length === 1 && inlineImages[0].pairWithText
+              ? inlineImages[0]
+              : undefined;
+
+          if (pairedImage) {
+            return (
+              <div
+                key={index}
+                className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 sm:gap-8"
+              >
+                <p className={isLede ? "text-h3" : undefined}>
+                  {renderWithHighlights(chunk)}
+                </p>
+                <MediaFrame image={pairedImage} />
+              </div>
+            );
+          }
 
           return (
             <Fragment key={index}>
-              <p className={isLede ? "text-h3" : undefined}>{chunk}</p>
+              <p className={isLede ? "text-h3" : undefined}>
+                {renderWithHighlights(chunk)}
+              </p>
               {inlineImages && inlineImages.length > 0 ? (
                 <MediaGroup images={inlineImages} emphasis="supporting" />
               ) : null}

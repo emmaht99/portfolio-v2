@@ -30,6 +30,7 @@ export interface ProjectImage {
   size?: "hero" | "large" | "standard" | "wide" | "square" | "phone";
   group?: string;
   afterHeading?: string;
+  pairWithText?: boolean;
 }
 
 export interface ProcessStage {
@@ -43,6 +44,12 @@ export interface InterviewGroup {
   title: string;
   icon: "person" | "badge" | "heart";
   points: string[];
+}
+
+export interface ProjectGuideline {
+  code: string;
+  title: string;
+  description: string;
 }
 
 export interface Project {
@@ -66,6 +73,7 @@ export interface Project {
   outcome?: string;
   processTimeline?: ProcessStage[];
   interviewPanel?: { groups: InterviewGroup[]; note?: string };
+  guidelines?: ProjectGuideline[];
   images: ProjectImage[];
   prototypeLink?: string;
 }
@@ -245,46 +253,199 @@ export const projects: Project[] = [
     category: "UX Design",
     year: 2025,
     description:
-      "Caritas Fællesskab is a digital platform concept created for Caritas Danmark, exploring how technology can support senior communities while respecting existing social practices and individual needs.",
+      "A Master's thesis exploring how digital technology can support Caritas Denmark's senior communities, translated into six design guidelines and a clickable prototype for a community platform.",
+
     coverImage: {
       src: "/projects/caritas-faellesskab/caritas fron page.png",
-      alt: "Front page of the Caritas Fællesskab digital platform prototype",
-      size: "hero",
+      alt: "Sign-in screen of the Caritas Fællesskab platform concept",
     },
+
+    heroImage: {
+      src: "/projects/caritas-faellesskab/caritas fron page.png",
+      alt: "Sign-in screen of the Caritas Fællesskab platform concept",
+      annotations: [
+        {
+          text: "quick sign-up, no public profile required",
+          className: "top-[46%] right-[2%] max-w-[9rem] rotate-[-3deg] text-right",
+        },
+      ],
+    },
+
     role:
-      "UX and Product Designer. Working together with one thesis partner, I contributed equally across research, design, analysis, workshop facilitation, concept development, and prototyping.",
-    context:
-      "Master's Thesis project with external partner Caritas Danmark. The project explored how digital technology can support senior communities while recognizing that every community has unique social structures, values, and ways of communicating.",
-    timeline:
-      "Completed in 2025 as a Master's thesis project.",
+      "UX & Product Designer. Thesis with one partner, equal contribution throughout.",
+
+    context: "Master's thesis with external partner Caritas Denmark.",
+
+    timeline: "Spring 2025, IT University of Copenhagen.",
+
     tools: [
       "Design ethnography",
-      "Interviews",
+      "Semi-structured interviews",
       "Co-design workshops",
       "Figma",
-      "Qualitative analysis",
+      "Grounded theory coding",
     ],
+
     deliverables: [
-      "Research findings",
-      "Design guidelines",
+      "Stakeholder analysis",
+      "Six design guidelines",
       "Co-design workshop",
       "Clickable Figma prototype",
-      "Digital platform concept",
     ],
+
     challenge:
-      "The challenge was understanding how digital technology could support senior communities without replacing the physical interactions and social practices that already created value.\n\nRather than designing technology for seniors as passive users, the project explored how seniors could become active contributors in shaping technology that reflects their own communities.",
+      "Caritas Denmark's senior communities run on physical, in-person practices: walking together, creating together, gathering over coffee. Information about them, though, is scattered across Facebook groups, word of mouth, and paper flyers left at church, with sign-up details sometimes buried inside comment threads. New and less-connected members were the ones who paid for it, missing walks they'd looked forward to.\n\nThe challenge was designing a digital platform that could ==fix that fragmentation without asking members to trade their physical community for a digital one==. Our problem statement: how can we tailor digital technology to support senior communities, while acknowledging that every community is unique?",
+
     process:
-      "Discovery\n\nWe used a design ethnographic approach, immersing ourselves in Caritas Denmark's senior communities through observations, conversations, and informal interactions. We intentionally used the term conversations rather than interviews, as these meetings were designed to happen in the participants' own environments and allow them to guide the direction of the discussion.\n\nCo-design\n\nThe insights from the conversations informed a co-design workshop with members of Caritas Denmark's senior communities. Using picture cards, value timelines, and scenario-based discussions, participants helped explore how digital technology could meaningfully support their existing practices.\n\nAnalysis\n\nBy analyzing conversations and workshop findings, we identified key needs around communication, personalization, accessibility, and maintaining the value of physical gatherings.",
+      "Fieldwork\n\nOver two months, we joined Caritas Ramblers' weekly walks and Caritas Krea's workshops as participants, not researchers. We called our meetings conversations rather than interviews, held on participants' own terms, in their own environments, at their own pace.\n\nWe paired this with semi-structured interviews across seven community members, then coded the material with grounded theory to find patterns across the fieldwork and interviews together.\n\nCo-Design Workshop\n\nThe fieldwork left us with six hypotheses about what makes the community work. We tested them in a 90-minute workshop with four members and a Caritas coordinator, using picture cards, a value timeline, and scenario cards to get past small talk into what the community actually meant to people.\n\nChoosing a photo of a shared workshop table, one Krea member put it simply: “You don't always have a space in your daily life... coming to another place and being together, I think that's very important for the creative process.”",
+
+    processFindings:
+      "Three things kept surfacing. Information was scattered across channels with no single source of truth. Voluntariness was the point, not a constraint: members chose Caritas specifically because, as one put it, “you can come and go as you please.” And despite the reliance on Facebook, several members actively avoided it, describing it as overwhelming rather than useful. These three patterns shaped the six guidelines below more than any single feature request did.",
+
     outcome:
-      "The outcome was a set of six design guidelines for a unified digital platform: fostering connection, supporting rather than replacing activities, ensuring accessibility, enabling personalization, providing timely communication, and creating spaces for member interaction.\n\nTo demonstrate how these principles could be applied, we created Caritas Fællesskab — a clickable Figma prototype for a digital community platform. The prototype was presented to Caritas Danmark and members of the senior communities, receiving very positive feedback. Caritas is currently exploring the possibility of deploying the concept in the future.\n\nA key learning from the project was the importance of designing with communities rather than simply designing for them. The project strengthened my understanding of participatory design, ethical research, and creating technology that respects existing human connections.",
+      "The fieldwork and workshop converged on six tailored design guidelines for a unified Caritas platform: not a spec for an app, but a set of principles for keeping the existing community at the center of any digital solution.\n\nTo show how the guidelines could come together in practice, we designed Caritas Fællesskab, a clickable Figma prototype built directly on these six principles. It was presented to Caritas Denmark and members of both communities, who responded positively; Caritas is currently exploring the possibility of deploying the concept.\n\nA key learning was the importance of designing with communities rather than simply designing for them. The project strengthened my understanding of participatory design, ethical research, and building technology that respects relationships that already work.",
+
+    processTimeline: [
+      {
+        label: "Fieldwork",
+        icon: "search",
+        points: [
+          "Two months embedded in Caritas Ramblers and Caritas Krea",
+          "Autoethnography: joining as members, not observers",
+          "Conversations held on participants' own terms",
+        ],
+      },
+      {
+        label: "Interviews",
+        icon: "chat",
+        points: [
+          "Semi-structured conversations with 7 community members",
+          "Coded with grounded theory to surface shared patterns",
+        ],
+      },
+      {
+        label: "Co-Design Workshop",
+        icon: "lines",
+        points: [
+          "Picture cards, a value timeline, and scenario cards",
+          "4 participants and a Caritas coordinator, testing 6 hypotheses",
+        ],
+      },
+      {
+        label: "Guidelines",
+        icon: "lightbulb",
+        points: [
+          "Findings translated into six tailored design guidelines",
+          "Presented back to Caritas Denmark and community members",
+        ],
+      },
+    ],
+
+    interviewPanel: {
+      note: "roles blur constantly: participants become volunteers, and volunteers stay participants",
+      groups: [
+        {
+          title: "Caritas Workers",
+          icon: "badge",
+          points: [
+            "Plan and coordinate every community",
+            "Motivated by purpose and creating space for others",
+          ],
+        },
+        {
+          title: "Volunteers",
+          icon: "heart",
+          points: [
+            "Guide the walks and creative workshops",
+            "Contribute without expecting anything back",
+          ],
+        },
+        {
+          title: "Participants",
+          icon: "person",
+          points: [
+            "Join for connection, not obligation",
+            "Value being free to come and go as they please",
+          ],
+        },
+      ],
+    },
+
+    guidelines: [
+      {
+        code: "G1",
+        title: "One official platform",
+        description:
+          "Bring Facebook, word of mouth, and paper flyers into a single trusted, synced source.",
+      },
+      {
+        code: "G2",
+        title: "Support, don't replace",
+        description:
+          "Keep the platform a coordination layer for the physical community, not another feed to perform on.",
+      },
+      {
+        code: "G3",
+        title: "Minimize barriers",
+        description:
+          "Quick sign-up with just a name, email, and phone. No public profile required.",
+      },
+      {
+        code: "G4",
+        title: "Personalization",
+        description:
+          "Let members choose which activities and notifications actually reach them.",
+      },
+      {
+        code: "G5",
+        title: "Right time, right information",
+        description:
+          "Timely alerts before an activity; open space for suggestions and photos after.",
+      },
+      {
+        code: "G6",
+        title: "Designated spaces",
+        description:
+          "Separate, clearly labeled areas for sign-ups, suggestions, and photo sharing.",
+      },
+    ],
+
     prototypeLink:
       "https://www.figma.com/proto/mPl1AkUoDNWE7stMJSiN8K/Caritas-App?node-id=1-6&starting-point-node-id=1%3A6&t=8yJBzKvtpItpY2gV-1",
+
     images: [
       {
-        src: "/projects/caritas-faellesskab/Fællesskab Workshop Dansk.png",
-        alt: "Materials from the Caritas Fællesskab co-design workshop, conducted in Danish",
+        src: "/projects/caritas-faellesskab/krea-workshop.jpg",
+        alt: "Members of Caritas Krea decorating gingerbread cookies together at a shared table",
+        caption: "A Caritas Krea session, one of the two communities studied through fieldwork",
+        section: "process",
+        size: "standard",
+        afterHeading: "Fieldwork",
+        pairWithText: true,
+      },
+      {
+        src: "/projects/caritas-faellesskab/workshop-timeline.jpg",
+        alt: "Paper timeline from the co-design workshop, with sticky-note values placed along it and arrows showing before, during, and after an activity",
+        caption: "Participants stretched their values across a timeline of before, during, and after an activity",
+        section: "process",
+        size: "hero",
+        afterHeading: "Co-Design Workshop",
+      },
+      {
+        src: "/projects/caritas-faellesskab/workshop-values.jpg",
+        alt: "Collage of community photos with hand-written value labels on sticky notes, arranged in a bullseye pattern",
+        caption: "The picture-card collage, with core community values placed at its center",
         section: "process",
         size: "large",
+        group: "Workshop artifacts",
+      },
+      {
+        src: "/projects/caritas-faellesskab/workshop-scenarios.jpg",
+        alt: "Scenario cards from the co-design workshop, each posing a realistic situation and a follow-up question",
+        caption: "Scenario cards used to surface unspoken norms, like who to ask before sharing a photo",
+        section: "process",
+        size: "standard",
+        group: "Workshop artifacts",
       },
     ],
   },
