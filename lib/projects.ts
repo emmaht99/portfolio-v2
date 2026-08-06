@@ -36,6 +36,7 @@ export interface ProcessStage {
   label: string;
   icon: "search" | "chat" | "lines" | "lightbulb";
   points: string[];
+  note?: string;
 }
 
 export interface InterviewGroup {
@@ -89,23 +90,21 @@ export const projects: Project[] = [
       annotations: [
         {
           text: "custom redesigned logo",
-          className: "bottom-[16%] left-[2%] max-w-[7rem] rotate-[-24deg]",
+          className: "bottom-[16%] left-[6%] max-w-[7rem] rotate-[-24deg]",
         },
         {
           text: "home page",
-          className: "bottom-[22%] right-[4%] max-w-[6rem] rotate-[-8deg] text-right",
+          className: "bottom-[22%] right-[14%] max-w-[6rem] rotate-[-8deg] text-right",
         },
       ],
     },
 
     role:
-      "UX Researcher and Designer. In a team of five, I contributed across all parts of the project, with a primary focus on planning and conducting user interviews, qualitative analysis, concept development, and Figma prototyping.",
-  
-    context:
-      "Master's course project: Design-driven Innovation. External case partner: Dansk Stalking Center.",
-  
-    timeline:
-      "Completed during my Master's 3rd semester. One semester project completed alongside three other course projects.",
+      "UX Researcher & Designer — team of five, focused on interviews, analysis, and prototyping.",
+
+    context: "Master's course project with Dansk Stalking Center.",
+
+    timeline: "Master's 3rd semester, alongside three parallel course projects.",
   
     tools: [
       "Figma",
@@ -126,7 +125,7 @@ export const projects: Project[] = [
       "Skytsengel was originally designed to help people experiencing stalking quickly alert their personal network during emergencies and document incidents for police purposes. Through research, we discovered an important limitation: many people affected by stalking don't have an existing network to rely on — a group the app's current design doesn't account for.\n\nOur problem statement became: How can Skytsengel ensure that stalking-affected people without a network feel safe and cared for, while still offering guidance and information?",
 
     process:
-      "We moved fluidly between these stages rather than in a strict line — early interviews reshaped our problem statement, which sent us back to define and empathize again. Because of the sensitive nature of the topic, we kept every interview structure flexible and adapted each conversation to the participant's comfort level.\n\nA poster presentation midway through pushed us to sharpen an initially broad problem statement into its final, more specific form. We visualized the sharpened concept as a clickable Figma prototype and presented it to Dansk Stalking Center, our lecturers, and fellow students.",
+      "We worked iteratively, moving back and forth between the process stages. The early interviews reshaped our problem statement, which sent us back to define and empathize again. Because of the sensitive nature of the topic, we kept every interview structure flexible and adapted each conversation to the participant's comfort level.\n\nA poster presentation midway through pushed us to sharpen an initially broad problem statement into its final, more specific form. We visualized the sharpened concept as a clickable Figma prototype and presented it to Dansk Stalking Center, our lecturers, and fellow students.",
 
     processFindings:
       "Across the interviews, three conflicts kept surfacing: isolation was a near-universal experience among stalking-affected people, most lacked real knowledge about what stalking is and how to respond to it, and Skytsengel's alarm-based approach risked giving a false sense of security. These three findings became the foundation for the redesigned concept.",
@@ -174,6 +173,7 @@ export const projects: Project[] = [
     ],
 
     interviewPanel: {
+      note: "we talked to people with various roles, to ensure the final solution was a help to both victims of stalking and the professionals supporting them",
       groups: [
         {
           title: "Lived experience",

@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import { Chat, Lightbulb, Lines, Search } from "@/components/Doodles";
 import type { DoodleProps } from "@/components/Doodles";
+import Scribble from "@/components/Scribble";
 import type { ProcessStage } from "@/lib/projects";
 
 type ProcessTimelineProps = {
@@ -20,7 +21,15 @@ export default function ProcessTimeline({ stages }: ProcessTimelineProps) {
       {stages.map((stage, index) => {
         const Icon = icons[stage.icon];
         return (
-          <div key={stage.label} className="flex flex-col gap-3">
+          <div
+            key={stage.label}
+            className={`relative flex flex-col gap-3 ${stage.note ? "pt-16" : ""}`}
+          >
+            {stage.note ? (
+              <Scribble className="text-halo pointer-events-none absolute -top-2 left-0 max-w-[20rem] -rotate-1 font-handwritten text-base leading-snug text-highlight">
+                {stage.note}
+              </Scribble>
+            ) : null}
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-neutral/20 bg-canvas text-accent">
                 <Icon className="h-6 w-6" />
