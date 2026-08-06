@@ -1,4 +1,7 @@
+import { Fragment, type ReactNode } from "react";
 import { Loop } from "@/components/Doodles";
+import MediaGroup from "@/components/MediaGroup";
+import type { ProjectImage } from "@/lib/projects";
 
 type ContentSectionVariant = "challenge" | "process" | "outcome";
 
@@ -9,6 +12,8 @@ type ContentSectionProps = {
   variant?: ContentSectionVariant;
   kicker?: string;
   sketchbook?: boolean;
+  mediaAfterHeading?: Record<string, ProjectImage[]>;
+  modelSlot?: ReactNode;
 };
 
 const SUBHEADING_MAX_LENGTH = 30;
@@ -28,6 +33,8 @@ export default function ContentSection({
   variant = "process",
   kicker,
   sketchbook = false,
+  mediaAfterHeading,
+  modelSlot,
 }: ContentSectionProps) {
   const Heading = headingLevel;
   const chunks = content
@@ -45,7 +52,7 @@ export default function ContentSection({
       }`}
     >
       {sketchbook && variant === "process" ? (
-        <Loop className="pointer-events-none absolute left-[-5rem] top-[79%] hidden h-28 w-16 -translate-y-1/2 text-highlight lg:block" />
+        <Loop className="pointer-events-none absolute left-[-5rem] top-[88%] hidden h-28 w-16 -translate-y-1/2 text-highlight lg:block" />
       ) : null}
 
       {kicker ? (
@@ -54,6 +61,7 @@ export default function ContentSection({
         </p>
       ) : null}
       <Heading className="font-display text-h2 text-ink">{heading}</Heading>
+      {modelSlot}
       <div className="flex flex-col gap-4">
         {chunks.map((chunk, index) => {
           if (isSubheading(chunk)) {
@@ -68,11 +76,19 @@ export default function ContentSection({
           }
 
           const isLede = useLede && index === 0;
+          const precedingChunk = index > 0 ? chunks[index - 1] : null;
+          const inlineImages =
+            precedingChunk && isSubheading(precedingChunk)
+              ? mediaAfterHeading?.[precedingChunk]
+              : undefined;
 
           return (
-            <p key={index} className={isLede ? "text-h3" : undefined}>
-              {chunk}
-            </p>
+            <Fragment key={index}>
+              <p className={isLede ? "text-h3" : undefined}>{chunk}</p>
+              {inlineImages && inlineImages.length > 0 ? (
+                <MediaGroup images={inlineImages} emphasis="supporting" />
+              ) : null}
+            </Fragment>
           );
         })}
       </div>

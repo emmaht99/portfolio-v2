@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import ContentSection from "@/components/ContentSection";
 import MediaFrame from "@/components/MediaFrame";
 import MediaGroup from "@/components/MediaGroup";
@@ -12,6 +13,7 @@ type CaseStudySectionProps = {
   variant: CaseStudySectionVariant;
   images: ProjectImage[];
   sketchbook?: boolean;
+  modelSlot?: ReactNode;
 };
 
 // Internal composition unit. Keeping this as a discriminated union (rather
@@ -62,6 +64,15 @@ function buildBlocks(images: ProjectImage[]): SectionBlock[] {
   return blocks;
 }
 
+function buildMediaAfterHeading(images: ProjectImage[]) {
+  const map: Record<string, ProjectImage[]> = {};
+  for (const image of images) {
+    if (!image.afterHeading) continue;
+    map[image.afterHeading] = [...(map[image.afterHeading] ?? []), image];
+  }
+  return map;
+}
+
 export default function CaseStudySection({
   kicker,
   heading,
@@ -69,12 +80,17 @@ export default function CaseStudySection({
   variant,
   images,
   sketchbook = false,
+  modelSlot,
 }: CaseStudySectionProps) {
-  const hasImages = images.length > 0;
+  const blockImages = images.filter((image) => !image.afterHeading);
+  const inlineImages = images.filter((image) => image.afterHeading);
+  const mediaAfterHeading = buildMediaAfterHeading(inlineImages);
+
+  const hasImages = blockImages.length > 0;
   const emphasis =
     hasImages && variant === "outcome" ? "feature" : "supporting";
   const mediaWidthClass = emphasis === "feature" ? "max-w-6xl" : "max-w-5xl";
-  const blocks = buildBlocks(images);
+  const blocks = buildBlocks(blockImages);
 
   return (
     <div className="flex flex-col gap-8">
@@ -88,6 +104,8 @@ export default function CaseStudySection({
                 content={content}
                 variant={variant}
                 sketchbook={sketchbook}
+                mediaAfterHeading={mediaAfterHeading}
+                modelSlot={modelSlot}
               />
             </div>
           );

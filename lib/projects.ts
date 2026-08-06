@@ -29,6 +29,19 @@ export interface ProjectImage {
   section?: "challenge" | "process" | "outcome";
   size?: "hero" | "large" | "standard" | "wide" | "square";
   group?: string;
+  afterHeading?: string;
+}
+
+export interface ProcessStage {
+  label: string;
+  icon: "search" | "chat" | "lines" | "lightbulb";
+  points: string[];
+}
+
+export interface InterviewGroup {
+  title: string;
+  icon: "person" | "badge" | "heart";
+  points: string[];
 }
 
 export interface Project {
@@ -39,6 +52,7 @@ export interface Project {
   description?: string;
   coverImage?: ProjectImage;
   heroImage?: ProjectImage;
+  titleNote?: string;
   sketchbook?: boolean;
   role?: string;
   context?: string;
@@ -47,7 +61,10 @@ export interface Project {
   deliverables: string[];
   challenge?: string;
   process?: string;
+  processFindings?: string;
   outcome?: string;
+  processTimeline?: ProcessStage[];
+  interviewPanel?: { groups: InterviewGroup[]; note?: string };
   images: ProjectImage[];
   prototypeLink?: string;
 }
@@ -61,10 +78,21 @@ export const projects: Project[] = [
     description:
       "A redesign of Dansk Stalking Center's Skytsengel app, transforming it from a safety tool into a broader support ecosystem for people experiencing stalking.",
 
-    coverImage: {
-      src: "/projects/skytsengel/mockup.png",
+    titleNote: "translates to “guardian angel”",
+
+    heroImage: {
+      src: "/projects/skytsengel/mockup-transparent.png",
       alt: "Mockup of the redesigned Skytsengel app interface",
-      size: "hero",
+      annotations: [
+        {
+          text: "custom redesigned logo",
+          className: "bottom-[20%] left-[6%] max-w-[7rem] rotate-[-22deg]",
+        },
+        {
+          text: "home page",
+          className: "bottom-[28%] right-[10%] max-w-[6rem] rotate-[-8deg] text-right",
+        },
+      ],
     },
 
     role:
@@ -79,49 +107,125 @@ export const projects: Project[] = [
     tools: [
       "Figma",
       "User Interviews",
+      "Brainwriting",
       "Qualitative Analysis",
       "UX Research"
     ],
-  
+
     deliverables: [
       "Interview guide",
       "Research analysis",
       "UX concept",
       "Interactive Figma prototype"
     ],
-  
+
     challenge:
-      "Skytsengel was originally designed to help stalking victims quickly contact their personal network during emergencies and document incidents for police purposes. Through research, we discovered an important limitation: many victims did not have a strong support network to rely on.\n\nThe challenge became: How can Skytsengel support stalking victims who feel isolated while providing guidance and information, without creating a false sense of security?",
-  
+      "Skytsengel was originally designed to help people experiencing stalking quickly alert their personal network during emergencies and document incidents for police purposes. Through research, we discovered an important limitation: many people affected by stalking don't have an existing network to rely on — a group the app's current design doesn't account for.\n\nOur problem statement became: How can Skytsengel ensure that stalking-affected people without a network feel safe and cared for, while still offering guidance and information?",
+
     process:
-      "We began by building an understanding of stalking and evaluating the existing Skytsengel app to identify usability issues and limitations.\n\nI designed the interview guide and helped conduct five semi-structured interviews with people involved in stalking cases: two individuals with lived experience of stalking, a representative from Dansk Stalking Center, a police officer working with stalking cases, and a psychologist.\n\nBecause of the sensitive nature of the topic, we focused on creating a flexible interview structure and adapting conversations based on participants' comfort levels. One participant was recruited through Dansk Stalking Center, while another was contacted directly after sharing their experience through a book and podcast.\n\nThrough qualitative coding, we identified recurring themes around isolation, the need for understanding and support, and the importance of ethical safety features.\n\nUsing these insights, we redesigned the core concept through ideation workshops and developed a clickable Figma prototype.",
-  
+      "We moved fluidly between these stages rather than in a strict line — early interviews reshaped our problem statement, which sent us back to define and empathize again. Because of the sensitive nature of the topic, we kept every interview structure flexible and adapted each conversation to the participant's comfort level.\n\nA poster presentation midway through pushed us to sharpen an initially broad problem statement into its final, more specific form. We visualized the sharpened concept as a clickable Figma prototype and presented it to Dansk Stalking Center, our lecturers, and fellow students.",
+
+    processFindings:
+      "Across the interviews, three conflicts kept surfacing: isolation was a near-universal experience among stalking-affected people, most lacked real knowledge about what stalking is and how to respond to it, and Skytsengel's alarm-based approach risked giving a false sense of security. These three findings became the foundation for the redesigned concept.",
+
     outcome:
-      "The final concept shifted Skytsengel from primarily being an emergency tool into a support ecosystem focused on three areas: emotional support, knowledge about stalking, and safe community connection.\n\nThe redesigned concept included daily supportive content, mindfulness exercises, educational resources, moderated support groups, professional guidance, and improved incident documentation.\n\nThe prototype was presented to Dansk Stalking Center, who responded positively and highlighted that a solution like this could be valuable for supporting people affected by stalking.\n\nThe project taught me the importance of precision and care when designing for sensitive situations. With more time, I would continue by testing the prototype with users and refining the functionality of the final product.",
+      "The final concept shifted Skytsengel from primarily being an emergency tool into a support ecosystem focused on three areas: emotional support, knowledge about stalking, and safe community connection.\n\nAlongside a redesigned app identity, the concept introduced daily supportive content and mindfulness exercises, an in-app library of educational content about stalking, moderated peer support groups, one-on-one chat with an advisor, and an improved calendar-based log for documenting incidents.\n\nThe prototype was presented to Dansk Stalking Center, who responded positively and highlighted that a solution like this could be valuable for supporting people affected by stalking. We also received critical feedback on privacy and data handling, which would need to be resolved before the concept could move beyond a prototype.\n\nThe project taught me the importance of precision and care when designing for sensitive situations. With more time, I would continue by testing the prototype with users and refining the functionality of the final product.",
+
+    processTimeline: [
+      {
+        label: "Empathize",
+        icon: "search",
+        points: [
+          "App critique and desktop research",
+          "Introductory meeting with Dansk Stalking Center",
+          "Early finding: stalking is systematic, not a single event",
+        ],
+      },
+      {
+        label: "Define",
+        icon: "lines",
+        points: [
+          "Framing the problem from a user's perspective",
+          "Initial problem statement drafted",
+          "Iterating between defining and interviewing",
+        ],
+      },
+      {
+        label: "Interview & Ideation",
+        icon: "chat",
+        points: [
+          "Interviews with police, a psychologist, and two informants",
+          "Coding and categorizing interview data",
+          "Brainwriting session to generate solution ideas",
+        ],
+      },
+      {
+        label: "Prototype & Test",
+        icon: "lightbulb",
+        points: [
+          "Poster presentation, then a pivot to a sharper problem",
+          "Clickable Figma prototype",
+          "Presentation to Dansk Stalking Center",
+        ],
+      },
+    ],
+
+    interviewPanel: {
+      note: "so many feel truly alone with it",
+      groups: [
+        {
+          title: "Lived experience",
+          icon: "person",
+          points: [
+            "Losing trust in others, including the police",
+            "Isolating themselves out of fear",
+          ],
+        },
+        {
+          title: "Police",
+          icon: "badge",
+          points: [
+            "What data police need for legal cases",
+            "Use the app day-to-day — but call 112 in an emergency",
+            "Alarm features can create a false sense of security",
+          ],
+        },
+        {
+          title: "Psychologist",
+          icon: "heart",
+          points: [
+            "So many feel truly alone with it",
+            "Who is responsible for guidance given inside the app?",
+          ],
+        },
+      ],
+    },
 
     images: [
       {
-        src: "/projects/skytsengel/interview info.png",
-        alt: "Summary of insights from user interviews conducted for the Skytsengel project",
-        section: "process",
-        size: "large",
-      },
-      {
-        src: "/projects/skytsengel/processmodel.png",
-        alt: "Process model outlining the Skytsengel design research and development stages",
-        section: "process",
-        size: "large",
-      },
-      {
-        src: "/projects/skytsengel/Home copy.png",
-        alt: "Home screen of the final Skytsengel prototype",
+        src: "/projects/skytsengel/prototype-home.png",
+        alt: "Home screen of the final Skytsengel prototype, with a daily supportive message and mindfulness content",
         section: "outcome",
         size: "standard",
         group: "Prototype screens",
       },
       {
-        src: "/projects/skytsengel/Landing Page copy.png",
-        alt: "Landing screen shown when first opening the Skytsengel prototype",
+        src: "/projects/skytsengel/prototype-knowledge.png",
+        alt: "Knowledge about stalking section of the final Skytsengel prototype",
+        section: "outcome",
+        size: "standard",
+        group: "Prototype screens",
+      },
+      {
+        src: "/projects/skytsengel/prototype-groups.png",
+        alt: "Moderated peer support group screen of the final Skytsengel prototype",
+        section: "outcome",
+        size: "standard",
+        group: "Prototype screens",
+      },
+      {
+        src: "/projects/skytsengel/prototype-log.png",
+        alt: "Calendar-based incident log screen of the final Skytsengel prototype",
         section: "outcome",
         size: "standard",
         group: "Prototype screens",
@@ -225,6 +329,7 @@ export const projects: Project[] = [
         section: "process",
         size: "wide",
         group: "Existing Deichman identity",
+        afterHeading: "Research & Strategy",
       },
       {
         src: "/projects/deichman-wrapped/brand-icons.png",
@@ -233,6 +338,7 @@ export const projects: Project[] = [
         section: "process",
         size: "square",
         group: "Existing Deichman identity",
+        afterHeading: "Research & Strategy",
       },
       {
         src: "/projects/deichman-wrapped/research.png",
@@ -249,17 +355,14 @@ export const projects: Project[] = [
           {
             text: "familiar branding",
             className: "top-2 right-3 -rotate-2 text-right",
-            arrowClassName: "top-20 right-28 h-7 w-7 rotate-[210deg]",
           },
           {
             text: "stats inspo",
             className: "top-[42%] left-2 rotate-1",
-            arrowClassName: "top-[45%] left-14 h-7 w-7 rotate-[95deg]",
           },
           {
             text: "made many low-fidelity prototypes before finding out what works",
             className: "bottom-2 right-3 max-w-[12rem] rotate-1 text-right",
-            arrowClassName: "bottom-24 right-24 h-7 w-7 -rotate-[80deg]",
           },
         ],
         section: "process",

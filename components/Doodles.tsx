@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type DoodleProps = {
+export type DoodleProps = {
   className?: string;
 };
 
@@ -242,6 +242,144 @@ export function Lightbulb({ className }: DoodleProps) {
         strokeWidth="1.6"
         strokeLinecap="round"
         transform="translate(0, 2)"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Search({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M14 4 C 19.5 4, 24 8.5, 24 14 C 24 19.5, 19.5 24, 14 24 C 8.5 24, 4 19.5, 4 14 C 4 8.5, 8.5 4, 14 4 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+      <path
+        d="M21 21 L28.5 28.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Chat({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M5 8 C 5 6, 6.5 5, 8.5 5 L23.5 5 C 25.5 5, 27 6, 27 8 L27 18 C 27 20, 25.5 21, 23.5 21 L14 21 L8 26 L9 21 L8.5 21 C 6.5 21, 5 20, 5 18 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M10.5 11 L21.5 11 M10.5 15.5 L18 15.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Person({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M16 16 C 19.5 16, 22 13.3, 22 9.5 C 22 6.5, 19.5 4, 16 4 C 12.5 4, 10 6.5, 10 9.5 C 10 13.3, 12.5 16, 16 16 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M5 28 C 5 21.5, 9.8 18, 16 18 C 22.2 18, 27 21.5, 27 28"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Badge({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M16 3 C 20 5.5, 23.5 6, 27 5.5 L27 16 C 27 23, 21.5 27, 16 29.5 C 10.5 27, 5 23, 5 16 L5 5.5 C 8.5 6, 12 5.5, 16 3 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M11.5 16 L14.5 19 L20.5 12.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Heart({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M16 27 C 16 27, 4 19.5, 4 11.5 C 4 7, 7.3 4.5, 10.8 4.5 C 13.2 4.5, 15 5.8, 16 7.8 C 17 5.8, 18.8 4.5, 21.2 4.5 C 24.7 4.5, 28 7, 28 11.5 C 28 19.5, 16 27, 16 27 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
         pathLength={1}
       />
     </svg>

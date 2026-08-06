@@ -9,21 +9,40 @@ type CaseStudyHeroProps = {
 };
 
 export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
-  const { title, description, coverImage, heroImage, prototypeLink } = project;
+  const {
+    title,
+    description,
+    coverImage,
+    heroImage,
+    prototypeLink,
+    sketchbook,
+    titleNote,
+  } = project;
 
   if (heroImage) {
     return (
       <header className="w-full border-b border-neutral/20">
-        <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
-          <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
-          <Sparkle className="pointer-events-none absolute left-9 -top-1 hidden h-4 w-4 rotate-12 text-highlight sm:block" />
-          <Sparkle className="pointer-events-none absolute left-1 top-16 hidden h-3 w-3 -rotate-6 text-highlight sm:block" />
-          <Sparkle className="pointer-events-none absolute -left-5 top-10 hidden h-5 w-5 rotate-3 text-highlight sm:block" />
+        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-[1fr_1.3fr] md:gap-16 md:py-24">
+          {sketchbook ? (
+            <>
+              <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
+              <Sparkle className="pointer-events-none absolute left-9 -top-1 hidden h-4 w-4 rotate-12 text-highlight sm:block" />
+              <Sparkle className="pointer-events-none absolute left-1 top-16 hidden h-3 w-3 -rotate-6 text-highlight sm:block" />
+              <Sparkle className="pointer-events-none absolute -left-5 top-10 hidden h-5 w-5 rotate-3 text-highlight sm:block" />
 
-          <Lines className="pointer-events-none absolute -right-1 top-6 hidden h-8 w-14 -rotate-3 text-highlight sm:block" />
+              <Lines className="pointer-events-none absolute -right-1 top-6 hidden h-8 w-14 -rotate-3 text-highlight sm:block" />
+            </>
+          ) : null}
 
           <div className="flex flex-col gap-6">
-            <h1 className="font-display text-h1 text-ink">{title}</h1>
+            <div className="flex flex-wrap items-start gap-3">
+              <h1 className="font-display text-h1 text-ink">{title}</h1>
+              {titleNote ? (
+                <Scribble className="text-halo mt-2 max-w-[11rem] -rotate-2 font-handwritten text-lg leading-tight text-highlight">
+                  {titleNote}
+                </Scribble>
+              ) : null}
+            </div>
             {description ? <p className="max-w-md">{description}</p> : null}
             {prototypeLink ? (
               <div className="relative inline-flex w-fit flex-col">
@@ -37,24 +56,41 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
             ) : null}
           </div>
 
-          <div className="relative mx-auto w-full max-w-xs pt-12">
-            <Scribble className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
-              a little peek into the experience
-            </Scribble>
+          <div
+            className={`relative mx-auto w-full max-w-2xl ${sketchbook ? "pt-12" : ""}`}
+          >
+            {sketchbook ? (
+              <Scribble className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
+                a little peek into the experience
+              </Scribble>
+            ) : null}
 
             <div className="relative aspect-square w-full">
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
                 fill
-                sizes="(min-width: 768px) 40vw, 90vw"
+                sizes="(min-width: 768px) 60vw, 95vw"
                 priority
                 className="object-contain"
               />
+
+              {heroImage.annotations?.map((note) => (
+                <Scribble
+                  key={note.text}
+                  className={`text-halo pointer-events-none absolute font-handwritten text-lg leading-tight text-highlight ${note.className}`}
+                >
+                  {note.text}
+                </Scribble>
+              ))}
             </div>
 
-            <Sparkle className="pointer-events-none absolute -left-4 bottom-6 h-8 w-8 rotate-6 text-highlight" />
-            <Sparkle className="pointer-events-none absolute -left-1 bottom-16 h-5 w-5 -rotate-12 text-highlight" />
+            {sketchbook ? (
+              <>
+                <Sparkle className="pointer-events-none absolute -left-4 bottom-6 h-8 w-8 rotate-6 text-highlight" />
+                <Sparkle className="pointer-events-none absolute -left-1 bottom-16 h-5 w-5 -rotate-12 text-highlight" />
+              </>
+            ) : null}
           </div>
         </div>
       </header>

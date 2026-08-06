@@ -3,6 +3,8 @@ import CaseStudyHero from "@/components/CaseStudyHero";
 import FactGrid from "@/components/FactGrid";
 import CaseStudySection from "@/components/CaseStudySection";
 import MediaFrame from "@/components/MediaFrame";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import InterviewPanel from "@/components/InterviewPanel";
 import Scribble from "@/components/Scribble";
 import { projects, type ProjectImage } from "@/lib/projects";
 
@@ -66,15 +68,36 @@ export default async function Page(props: PageProps<"/work/[project]">) {
       </div>
 
       {sections.map((section, index) => (
-        <CaseStudySection
-          key={section.variant}
-          kicker={String(index + 1).padStart(2, "0")}
-          heading={section.heading}
-          content={section.content}
-          variant={section.variant}
-          images={section.images}
-          sketchbook={project.sketchbook}
-        />
+        <div key={section.variant} className="flex flex-col gap-16">
+          <CaseStudySection
+            kicker={String(index + 1).padStart(2, "0")}
+            heading={section.heading}
+            content={section.content}
+            variant={section.variant}
+            images={section.images}
+            sketchbook={project.sketchbook}
+            modelSlot={
+              section.variant === "process" && project.processTimeline ? (
+                <ProcessTimeline stages={project.processTimeline} />
+              ) : undefined
+            }
+          />
+
+          {section.variant === "process" && project.interviewPanel ? (
+            <div className="mx-auto w-full max-w-5xl px-4">
+              <InterviewPanel
+                groups={project.interviewPanel.groups}
+                note={project.interviewPanel.note}
+              />
+            </div>
+          ) : null}
+
+          {section.variant === "process" && project.processFindings ? (
+            <div className="mx-auto w-full max-w-5xl px-4">
+              <p>{project.processFindings}</p>
+            </div>
+          ) : null}
+        </div>
       ))}
 
       {project.sketchbook ? (
