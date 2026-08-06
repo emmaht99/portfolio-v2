@@ -13,12 +13,19 @@ export type ProjectCategory =
   | "Visual Design"
   | "AI / Prototyping";
 
+export interface ProjectImageAnnotation {
+  text: string;
+  placement: "above" | "below";
+  align?: "left" | "right";
+  size?: "base" | "lg" | "xl";
+  icon?: "book" | "lightbulb";
+}
+
 export interface ProjectImage {
   src: string;
   alt: string;
   caption?: string;
-  annotation?: string;
-  annotationIcon?: "book" | "lightbulb";
+  annotations?: ProjectImageAnnotation[];
   section?: "challenge" | "process" | "outcome";
   size?: "hero" | "large" | "standard" | "wide" | "square";
   group?: string;
@@ -187,12 +194,9 @@ export const projects: Project[] = [
     },
     sketchbook: true,
     prototypeLink: "https://deichman-wrapped--emmaht99.replit.app/",
-    role:
-      "Product Designer & AI-Assisted Prototyper. I led the project from concept development and research to UX design, prototyping, and building a functional demo experience using AI-assisted tools.",
-    context:
-      "A self-initiated project exploring how public institutions can use personal data and familiar digital patterns to create stronger emotional connections with users.",
-    timeline:
-      "Created in 2025 as an independent design exploration.",
+    role: "Product Designer & AI-Assisted Prototyper",
+    context: "Self-initiated project for a public library",
+    timeline: "2025",
     tools: [
       "Figma",
       "Figma Make",
@@ -235,8 +239,30 @@ export const projects: Project[] = [
         alt: "Research board comparing year-in-review formats and brainstorming ideas for Deichman Wrapped",
         caption:
           "Mapping similar year-in-review formats and brainstorming what a library version could show",
-        annotation: "the brainstorm",
-        annotationIcon: "lightbulb",
+        annotations: [
+          {
+            text: "the brainstorm",
+            icon: "lightbulb",
+            placement: "above",
+            align: "left",
+            size: "xl",
+          },
+          {
+            text: "familiar branding",
+            placement: "above",
+            align: "right",
+          },
+          {
+            text: "stats inspo",
+            placement: "below",
+            align: "left",
+          },
+          {
+            text: "made many low-fidelity prototypes before finding out what works",
+            placement: "below",
+            align: "right",
+          },
+        ],
         section: "process",
         size: "large",
       },

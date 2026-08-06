@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Book, Lightbulb } from "@/components/Doodles";
-import type { ProjectImage } from "@/lib/projects";
+import { Arrow, Book, Lightbulb } from "@/components/Doodles";
+import type { ProjectImage, ProjectImageAnnotation } from "@/lib/projects";
 
 type MediaFrameProps = {
   image?: ProjectImage;
@@ -22,34 +22,80 @@ const annotationIcons = {
   lightbulb: Lightbulb,
 };
 
-export default function MediaFrame({ image }: MediaFrameProps) {
-  const aspectClass = aspectBySize[image?.size ?? "standard"];
-  const AnnotationIcon = image?.annotationIcon
-    ? annotationIcons[image.annotationIcon]
-    : null;
+const sizeClasses: Record<NonNullable<ProjectImageAnnotation["size"]>, string> = {
+  base: "text-lg",
+  lg: "text-xl",
+  xl: "text-3xl",
+};
+
+function AnnotationNote({ note }: { note: ProjectImageAnnotation }) {
+  const Icon = note.icon ? annotationIcons[note.icon] : null;
+  const align = note.align ?? "left";
+  const alignClasses = align === "right" ? "items-end text-right" : "items-start text-left";
+  const arrowClasses =
+    note.placement === "above"
+      ? `rotate-[155deg] ${align === "right" ? "-scale-x-100" : ""}`
+      : `-rotate-[25deg] ${align === "right" ? "-scale-x-100" : ""}`;
+
+  const label = (
+    <div className="flex items-center gap-1.5">
+      {Icon ? <Icon className="h-6 w-6 shrink-0 -rotate-6 text-highlight" /> : null}
+      <p
+        className={`font-handwritten leading-tight text-highlight ${sizeClasses[note.size ?? "base"]}`}
+      >
+        {note.text}
+      </p>
+    </div>
+  );
+
+  const arrow = (
+    <Arrow className={`h-6 w-6 shrink-0 text-highlight ${arrowClasses}`} />
+  );
 
   return (
-    <figure className="flex flex-col gap-2">
+    <div className={`flex max-w-xs flex-col gap-0.5 ${alignClasses}`}>
+      {note.placement === "below" ? arrow : null}
+      {label}
+      {note.placement === "above" ? arrow : null}
+    </div>
+  );
+}
+
+export default function MediaFrame({ image }: MediaFrameProps) {
+  const aspectClass = aspectBySize[image?.size ?? "standard"];
+  const above = image?.annotations?.filter((note) => note.placement === "above") ?? [];
+  const below = image?.annotations?.filter((note) => note.placement === "below") ?? [];
+
+  return (
+    <figure className="flex flex-col gap-3">
       {image ? (
-        <div className={`${frameClasses} ${aspectClass}`}>
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1024px) 800px, 100vw"
-            className="object-cover"
-          />
-          {image.annotation ? (
-            <div className="absolute left-3 top-3 flex items-center gap-1.5">
-              {AnnotationIcon ? (
-                <AnnotationIcon className="h-6 w-6 -rotate-6 text-highlight" />
-              ) : null}
-              <p className="text-halo -rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
-                {image.annotation}
-              </p>
+        <>
+          {above.length > 0 ? (
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              {above.map((note) => (
+                <AnnotationNote key={note.text} note={note} />
+              ))}
             </div>
           ) : null}
-        </div>
+
+          <div className={`${frameClasses} ${aspectClass}`}>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 800px, 100vw"
+              className="object-cover"
+            />
+          </div>
+
+          {below.length > 0 ? (
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              {below.map((note) => (
+                <AnnotationNote key={note.text} note={note} />
+              ))}
+            </div>
+          ) : null}
+        </>
       ) : (
         <div className={`${frameClasses} ${aspectClass}`} aria-hidden="true" />
       )}

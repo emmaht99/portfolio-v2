@@ -16,27 +16,7 @@ export function Sparkle({ className }: DoodleProps) {
   );
 }
 
-type SquiggleProps = DoodleProps & {
-  variant?: 1 | 2 | 3;
-};
-
-const squigglePaths: Record<1 | 2 | 3, [string, string]> = {
-  1: [
-    "M2 10 Q 40 2, 80 10 T 160 10 T 278 8",
-    "M2 15 Q 40 7, 80 15 T 160 15 T 278 13",
-  ],
-  2: [
-    "M2 12 Q 28 3, 58 12 Q 92 21, 128 10 Q 160 1, 196 11 Q 232 20, 278 9",
-    "M2 17 Q 28 8, 58 17 Q 92 26, 128 15 Q 160 6, 196 16 Q 232 25, 278 14",
-  ],
-  3: [
-    "M2 8 Q 45 18, 90 7 Q 130 -2, 170 9 Q 205 18, 240 8 Q 258 3, 278 11",
-    "M2 13 Q 45 23, 90 12 Q 130 3, 170 14 Q 205 23, 240 13 Q 258 8, 278 16",
-  ],
-};
-
-export function Squiggle({ className, variant = 1 }: SquiggleProps) {
-  const [top, bottom] = squigglePaths[variant];
+export function Squiggle({ className }: DoodleProps) {
   return (
     <svg
       viewBox="0 0 280 20"
@@ -45,14 +25,14 @@ export function Squiggle({ className, variant = 1 }: SquiggleProps) {
       aria-hidden="true"
     >
       <path
-        d={top}
+        d="M2 10 Q 40 2, 80 10 T 160 10 T 278 8"
         fill="none"
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
       />
       <path
-        d={bottom}
+        d="M2 15 Q 40 7, 80 15 T 160 15 T 278 13"
         fill="none"
         stroke="currentColor"
         strokeWidth="2.5"
@@ -136,6 +116,39 @@ export function Book({ className }: DoodleProps) {
   );
 }
 
+export function Lines({ className }: DoodleProps) {
+  return (
+    <svg
+      viewBox="0 0 40 24"
+      className={className}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M4 4 Q 14 1.5, 24 4.5 T 36 3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M2 12 Q 13 9.5, 23 12.5 T 33 11"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 20 Q 12 17.5, 19 20.5 T 29 18.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function Lightbulb({ className }: DoodleProps) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
@@ -167,7 +180,12 @@ export function Lightbulb({ className }: DoodleProps) {
 
 export function Loop({ className }: DoodleProps) {
   return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+    <svg
+      viewBox="0 0 64 64"
+      className={className}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
       <path
         d="M12 28 A 22 22 0 0 1 48 17"
         fill="none"

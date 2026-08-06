@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/Button";
-import { Book, Circle, Sparkle, Squiggle } from "@/components/Doodles";
+import { Book, Lines, Sparkle } from "@/components/Doodles";
 import type { Project } from "@/lib/projects";
 
 type CaseStudyHeroProps = {
@@ -15,6 +15,11 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
       <header className="w-full border-b border-neutral/20">
         <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
           <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
+          <Sparkle className="pointer-events-none absolute left-9 -top-1 hidden h-4 w-4 rotate-12 text-highlight sm:block" />
+          <Sparkle className="pointer-events-none absolute left-1 top-16 hidden h-3 w-3 -rotate-6 text-highlight sm:block" />
+          <Sparkle className="pointer-events-none absolute -left-5 top-10 hidden h-5 w-5 rotate-3 text-highlight sm:block" />
+
+          <Lines className="pointer-events-none absolute -right-1 top-6 hidden h-8 w-14 -rotate-3 text-highlight sm:block" />
 
           <div className="flex flex-col gap-6">
             <h1 className="font-display text-h1 text-ink">{title}</h1>
@@ -27,21 +32,14 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
                 <p className="text-halo absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
                   try it out!
                 </p>
-                <Squiggle
-                  variant={2}
-                  className="absolute -bottom-9 left-1/2 h-3 w-28 -translate-x-1/2 rotate-2 text-highlight"
-                />
               </div>
             ) : null}
           </div>
 
           <div className="relative mx-auto w-full max-w-xs pt-12">
-            <div className="absolute -top-11 right-2 flex h-20 w-48 items-center justify-center">
-              <Circle className="pointer-events-none absolute inset-0 h-full w-full text-highlight" />
-              <p className="text-halo relative -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                a sneak peek
-              </p>
-            </div>
+            <p className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
+              a little peek into the experience
+            </p>
 
             <div className="relative aspect-square w-full">
               <Image
