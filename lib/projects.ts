@@ -84,6 +84,11 @@ export const projects: Project[] = [
     prototypeLink:
       "https://www.figma.com/proto/8zc4vgDHYOjZgGzaBzTArJ/Ny-Skytsengel-Prototype?node-id=0-1",
 
+    coverImage: {
+      src: "/projects/skytsengel/mockup.png",
+      alt: "Mockup of the redesigned Skytsengel app interface",
+    },
+
     heroImage: {
       src: "/projects/skytsengel/mockup-hero.png",
       alt: "Mockup of the redesigned Skytsengel app interface",
