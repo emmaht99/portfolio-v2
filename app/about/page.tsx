@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "@/components/Button";
 import CollageVideo from "@/components/CollageVideo";
+import Scribble from "@/components/Scribble";
 
 export default function Page() {
   return (
@@ -38,9 +39,9 @@ export default function Page() {
               priority
               className="h-auto w-full max-w-md"
             />
-            <p className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-2xl text-ink">
+            <Scribble className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-2xl text-ink">
               painting
-            </p>
+            </Scribble>
           </div>
 
           <div className="rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
@@ -72,9 +73,9 @@ export default function Page() {
               height={4032}
               className="h-auto w-full max-w-[220px]"
             />
-            <p className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-1 whitespace-nowrap font-handwritten text-2xl text-ink">
+            <Scribble className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-1 whitespace-nowrap font-handwritten text-2xl text-ink">
               bunad ❤️❤️
-            </p>
+            </Scribble>
           </div>
 
           <div className="-rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
@@ -96,9 +97,9 @@ export default function Page() {
               height={4032}
               className="h-auto w-full max-w-[220px]"
             />
-            <p className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-ink">
+            <Scribble className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-ink">
               making latteart
-            </p>
+            </Scribble>
           </div>
 
           {/* Music video */}
@@ -107,9 +108,9 @@ export default function Page() {
               src="/about/playing-music.mp4"
               className="h-auto w-full max-w-[200px]"
             />
-            <p className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 rotate-1 whitespace-nowrap font-handwritten text-2xl text-ink">
+            <Scribble className="text-halo absolute -bottom-4 left-1/2 -translate-x-1/2 rotate-1 whitespace-nowrap font-handwritten text-2xl text-ink">
               playing muuuusic
-            </p>
+            </Scribble>
           </div>
         </div>
       </section>

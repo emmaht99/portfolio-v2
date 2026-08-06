@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "@/components/Button";
 import { Book, Lines, Sparkle } from "@/components/Doodles";
+import Scribble from "@/components/Scribble";
 import type { Project } from "@/lib/projects";
 
 type CaseStudyHeroProps = {
@@ -29,17 +30,17 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
                 <Button href={prototypeLink} external className="rounded-full">
                   View live prototype
                 </Button>
-                <p className="text-halo absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
+                <Scribble className="text-halo absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
                   try it out!
-                </p>
+                </Scribble>
               </div>
             ) : null}
           </div>
 
           <div className="relative mx-auto w-full max-w-xs pt-12">
-            <p className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
+            <Scribble className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
               a little peek into the experience
-            </p>
+            </Scribble>
 
             <div className="relative aspect-square w-full">
               <Image

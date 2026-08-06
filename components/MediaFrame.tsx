@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Arrow, Book, Lightbulb } from "@/components/Doodles";
+import Scribble from "@/components/Scribble";
 import type { ProjectImage, ProjectImageAnnotation } from "@/lib/projects";
 
 type MediaFrameProps = {
@@ -15,7 +16,7 @@ const aspectBySize: Record<NonNullable<ProjectImage["size"]>, string> = {
 };
 
 const frameClasses =
-  "relative overflow-hidden border border-neutral/20 bg-neutral/10 shadow-sm";
+  "overflow-hidden border border-neutral/20 bg-neutral/10 shadow-sm";
 
 const annotationIcons = {
   book: Book,
@@ -28,57 +29,14 @@ const sizeClasses: Record<NonNullable<ProjectImageAnnotation["size"]>, string> =
   xl: "text-3xl",
 };
 
-function AnnotationNote({ note }: { note: ProjectImageAnnotation }) {
-  const Icon = note.icon ? annotationIcons[note.icon] : null;
-  const align = note.align ?? "left";
-  const alignClasses = align === "right" ? "items-end text-right" : "items-start text-left";
-  const arrowClasses =
-    note.placement === "above"
-      ? `rotate-[155deg] ${align === "right" ? "-scale-x-100" : ""}`
-      : `-rotate-[25deg] ${align === "right" ? "-scale-x-100" : ""}`;
-
-  const label = (
-    <div className="flex items-center gap-1.5">
-      {Icon ? <Icon className="h-6 w-6 shrink-0 -rotate-6 text-highlight" /> : null}
-      <p
-        className={`font-handwritten leading-tight text-highlight ${sizeClasses[note.size ?? "base"]}`}
-      >
-        {note.text}
-      </p>
-    </div>
-  );
-
-  const arrow = (
-    <Arrow className={`h-6 w-6 shrink-0 text-highlight ${arrowClasses}`} />
-  );
-
-  return (
-    <div className={`flex max-w-xs flex-col gap-0.5 ${alignClasses}`}>
-      {note.placement === "below" ? arrow : null}
-      {label}
-      {note.placement === "above" ? arrow : null}
-    </div>
-  );
-}
-
 export default function MediaFrame({ image }: MediaFrameProps) {
   const aspectClass = aspectBySize[image?.size ?? "standard"];
-  const above = image?.annotations?.filter((note) => note.placement === "above") ?? [];
-  const below = image?.annotations?.filter((note) => note.placement === "below") ?? [];
 
   return (
-    <figure className="flex flex-col gap-3">
+    <figure className="flex flex-col gap-2">
       {image ? (
-        <>
-          {above.length > 0 ? (
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              {above.map((note) => (
-                <AnnotationNote key={note.text} note={note} />
-              ))}
-            </div>
-          ) : null}
-
-          <div className={`${frameClasses} ${aspectClass}`}>
+        <div className={`relative ${aspectClass}`}>
+          <div className={`absolute inset-0 ${frameClasses}`}>
             <Image
               src={image.src}
               alt={image.alt}
@@ -88,16 +46,36 @@ export default function MediaFrame({ image }: MediaFrameProps) {
             />
           </div>
 
-          {below.length > 0 ? (
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              {below.map((note) => (
-                <AnnotationNote key={note.text} note={note} />
-              ))}
-            </div>
-          ) : null}
-        </>
+          {image.annotations?.map((note) => {
+            const Icon = note.icon ? annotationIcons[note.icon] : null;
+            return (
+              <div
+                key={note.text}
+                className={`pointer-events-none absolute flex items-center gap-1.5 ${note.className}`}
+              >
+                {Icon ? (
+                  <Icon className="h-6 w-6 shrink-0 -rotate-6 text-highlight" />
+                ) : null}
+                <Scribble
+                  className={`text-halo font-handwritten leading-tight text-highlight ${sizeClasses[note.size ?? "base"]}`}
+                >
+                  {note.text}
+                </Scribble>
+              </div>
+            );
+          })}
+
+          {image.annotations
+            ?.filter((note) => note.arrowClassName)
+            .map((note) => (
+              <Arrow
+                key={`${note.text}-arrow`}
+                className={`pointer-events-none absolute text-highlight ${note.arrowClassName}`}
+              />
+            ))}
+        </div>
       ) : (
-        <div className={`${frameClasses} ${aspectClass}`} aria-hidden="true" />
+        <div className={`relative ${frameClasses} ${aspectClass}`} aria-hidden="true" />
       )}
 
       {image?.caption ? (

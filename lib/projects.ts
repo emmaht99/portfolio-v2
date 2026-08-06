@@ -15,10 +15,10 @@ export type ProjectCategory =
 
 export interface ProjectImageAnnotation {
   text: string;
-  placement: "above" | "below";
-  align?: "left" | "right";
+  className: string;
   size?: "base" | "lg" | "xl";
   icon?: "book" | "lightbulb";
+  arrowClassName?: string;
 }
 
 export interface ProjectImage {
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     prototypeLink: "https://deichman-wrapped--emmaht99.replit.app/",
     role: "Product Designer & AI-Assisted Prototyper",
     context: "Self-initiated project for a public library",
-    timeline: "2025",
+    timeline: "Fall 2025",
     tools: [
       "Figma",
       "Figma Make",
@@ -243,24 +243,24 @@ export const projects: Project[] = [
           {
             text: "the brainstorm",
             icon: "lightbulb",
-            placement: "above",
-            align: "left",
             size: "xl",
+            className: "top-2 left-2 -rotate-2",
+            arrowClassName: "top-14 left-12 h-7 w-7 rotate-[145deg]",
           },
           {
             text: "familiar branding",
-            placement: "above",
-            align: "right",
+            className: "top-2 right-3 -rotate-2 text-right",
+            arrowClassName: "top-20 right-28 h-7 w-7 rotate-[210deg]",
           },
           {
             text: "stats inspo",
-            placement: "below",
-            align: "left",
+            className: "top-[42%] left-2 rotate-1",
+            arrowClassName: "top-[45%] left-14 h-7 w-7 rotate-[95deg]",
           },
           {
             text: "made many low-fidelity prototypes before finding out what works",
-            placement: "below",
-            align: "right",
+            className: "bottom-2 right-3 max-w-[12rem] rotate-1 text-right",
+            arrowClassName: "bottom-24 right-24 h-7 w-7 -rotate-[80deg]",
           },
         ],
         section: "process",

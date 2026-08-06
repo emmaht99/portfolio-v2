@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import TextLink from "@/components/TextLink";
 import ProjectCard from "@/components/ProjectCard";
 import { Sparkle, Squiggle } from "@/components/Doodles";
+import Scribble from "@/components/Scribble";
 import { projects } from "@/lib/projects";
 
 const featuredSlugs = ["skytsengel", "caritas-faellesskab", "deichman-wrapped"];
@@ -19,10 +20,10 @@ export default function Home() {
       <header className="w-full">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-16 md:py-24">
           <div className="flex flex-col gap-4">
-            <p className="-ml-6 -rotate-3 font-handwritten text-xl text-highlight">
+            <Scribble className="-ml-6 -rotate-3 font-handwritten text-xl text-highlight">
               I design digital experiences that connect people, communities,
               and technology.
-            </p>
+            </Scribble>
 
             <div className="relative aspect-[2/3] shadow-md">
               <div className="absolute inset-0 overflow-hidden">
@@ -62,9 +63,9 @@ export default function Home() {
               </Button>
             </div>
 
-            <p className="font-handwritten -rotate-2 self-end text-2xl text-highlight">
+            <Scribble className="font-handwritten -rotate-2 self-end text-2xl text-highlight">
               scroll down to see my work
-            </p>
+            </Scribble>
           </div>
         </div>
       </header>

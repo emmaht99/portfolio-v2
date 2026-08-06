@@ -3,6 +3,7 @@ import CaseStudyHero from "@/components/CaseStudyHero";
 import FactGrid from "@/components/FactGrid";
 import CaseStudySection from "@/components/CaseStudySection";
 import MediaFrame from "@/components/MediaFrame";
+import Scribble from "@/components/Scribble";
 import { projects, type ProjectImage } from "@/lib/projects";
 
 type SectionVariant = "challenge" | "process" | "outcome";
@@ -78,9 +79,9 @@ export default async function Page(props: PageProps<"/work/[project]">) {
 
       {project.sketchbook ? (
         <div className="mx-auto w-full max-w-5xl px-4">
-          <p className="text-halo w-fit -rotate-1 font-handwritten text-2xl text-highlight">
+          <Scribble className="text-halo w-fit -rotate-1 font-handwritten text-2xl text-highlight">
             crossing my fingers that this will exist in the future!
-          </p>
+          </Scribble>
         </div>
       ) : null}
 
