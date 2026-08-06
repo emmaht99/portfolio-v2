@@ -17,8 +17,9 @@ export interface ProjectImage {
   src: string;
   alt: string;
   caption?: string;
+  annotation?: string;
   section?: "challenge" | "process" | "outcome";
-  size?: "hero" | "large" | "standard";
+  size?: "hero" | "large" | "standard" | "wide" | "square";
   group?: string;
 }
 
@@ -29,6 +30,8 @@ export interface Project {
   year?: number;
   description?: string;
   coverImage?: ProjectImage;
+  heroImage?: ProjectImage;
+  sketchbook?: boolean;
   role?: string;
   context?: string;
   timeline?: string;
@@ -174,10 +177,15 @@ export const projects: Project[] = [
     description:
       "Deichman Wrapped is a self-initiated product concept exploring how public libraries can create more engaging digital experiences. Inspired by Spotify Wrapped, the project transforms library activity into a playful and personalized year-in-review experience.",
     coverImage: {
-      src: "/projects/deichman-wrapped/research.png",
-      alt: "Research overview for the Deichman Wrapped project",
-      size: "hero",
+      src: "/projects/deichman-wrapped/landing-screen.png",
+      alt: "Mockup of the Deichman Wrapped entry screen on a phone",
     },
+    heroImage: {
+      src: "/projects/deichman-wrapped/hero-collage.png",
+      alt: "Three phone screens from Deichman Wrapped showing favorite genres, a thank-you message, and a reading statistic",
+    },
+    sketchbook: true,
+    prototypeLink: "https://deichman-wrapped--emmaht99.replit.app/",
     role:
       "Product Designer & AI-Assisted Prototyper. I led the project from concept development and research to UX design, prototyping, and building a functional demo experience using AI-assisted tools.",
     context:
@@ -204,7 +212,40 @@ export const projects: Project[] = [
       "Research & Strategy\n\nI analyzed existing year-in-review experiences and explored why these formats create engagement. I also audited Deichman's visual identity and mission to ensure the concept felt like a natural extension of the existing brand.\n\nIdeation\n\nI explored which data points could create meaningful moments for users, moving beyond simple usage statistics toward more personal and playful reflections.\n\nDesign\n\nI created low-fidelity sketches to establish information hierarchy, interaction flow, and a clear data storytelling structure.\n\nPrototyping\n\nI developed the concept into a high-fidelity interactive prototype using Figma Make and continued experimentation in Replit, where I created and published a working demo. AI tools were used as design and development partners throughout the process.",
     outcome:
       "The outcome was a complete product concept and published prototype exploring how libraries can use personalization and data storytelling to increase engagement.\n\nThe project strengthened my understanding of designing for engagement, maintaining brand authenticity while creating something new, and using AI as a collaborative partner in the design and development process.",
-    images: [],
+    images: [
+      {
+        src: "/projects/deichman-wrapped/brand-posters.png",
+        alt: "Existing Deichman library campaign posters, each addressed to a different reader",
+        caption: "Deichman's existing “Kjære …” campaign posters",
+        section: "challenge",
+        size: "wide",
+        group: "Existing Deichman identity",
+      },
+      {
+        src: "/projects/deichman-wrapped/brand-icons.png",
+        alt: "Deichman's wayfinding icon system used across its libraries",
+        caption: "Deichman's wayfinding icon system",
+        section: "challenge",
+        size: "standard",
+        group: "Existing Deichman identity",
+      },
+      {
+        src: "/projects/deichman-wrapped/research.png",
+        alt: "Research board comparing year-in-review formats and brainstorming ideas for Deichman Wrapped",
+        caption:
+          "Mapping similar year-in-review formats and brainstorming what a library version could show",
+        annotation: "the brainstorm",
+        section: "process",
+        size: "large",
+      },
+      {
+        src: "/projects/deichman-wrapped/landing-screen.png",
+        alt: "Early concept screen for Deichman Wrapped, showing the app name and a call to sign in",
+        caption: "An early concept for the entry screen",
+        section: "process",
+        size: "square",
+      },
+    ],
   },
   {
     title: "TMNDEF Wine Label",

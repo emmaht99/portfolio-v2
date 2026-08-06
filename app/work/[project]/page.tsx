@@ -72,6 +72,7 @@ export default async function Page(props: PageProps<"/work/[project]">) {
           content={section.content}
           variant={section.variant}
           images={section.images}
+          sketchbook={project.sketchbook}
         />
       ))}
 

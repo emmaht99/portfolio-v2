@@ -18,6 +18,7 @@ type ButtonAsButtonProps = ButtonCommonProps & {
 
 type ButtonAsLinkProps = ButtonCommonProps & {
   href: string;
+  external?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -36,6 +37,21 @@ export default function Button(props: ButtonProps) {
   const classes = `${baseClasses} ${variantClasses[variant]} ${className ?? ""}`;
 
   if (props.href !== undefined) {
+    if (props.external) {
+      return (
+        <a
+          href={props.href}
+          onClick={props.onClick}
+          className={classes}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      );
+    }
+
     return (
       <Link href={props.href} onClick={props.onClick} className={classes}>
         {children}

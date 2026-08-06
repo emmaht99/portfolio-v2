@@ -11,6 +11,7 @@ type CaseStudySectionProps = {
   content: string;
   variant: CaseStudySectionVariant;
   images: ProjectImage[];
+  sketchbook?: boolean;
 };
 
 // Internal composition unit. Keeping this as a discriminated union (rather
@@ -67,6 +68,7 @@ export default function CaseStudySection({
   content,
   variant,
   images,
+  sketchbook = false,
 }: CaseStudySectionProps) {
   const hasImages = images.length > 0;
   const emphasis =
@@ -85,6 +87,7 @@ export default function CaseStudySection({
                 heading={heading}
                 content={content}
                 variant={variant}
+                sketchbook={sketchbook}
               />
             </div>
           );

@@ -2,49 +2,10 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import TextLink from "@/components/TextLink";
 import ProjectCard from "@/components/ProjectCard";
+import { Sparkle, Squiggle } from "@/components/Doodles";
 import { projects } from "@/lib/projects";
 
 const featuredSlugs = ["skytsengel", "caritas-faellesskab", "deichman-wrapped"];
-
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path
-        d="M12 2 L14 9 L21 11 L14 13 L12 21 L10 13 L3 11 L10 9 Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function Squiggle({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 280 20"
-      className={className}
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M2 10 Q 40 2, 80 10 T 160 10 T 278 8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M2 15 Q 40 7, 80 15 T 160 15 T 278 13"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export default function Home() {
   const featuredProjects = featuredSlugs

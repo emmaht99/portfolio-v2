@@ -9,6 +9,8 @@ const aspectBySize: Record<NonNullable<ProjectImage["size"]>, string> = {
   hero: "aspect-[21/9]",
   large: "aspect-[3/2]",
   standard: "aspect-[4/3]",
+  wide: "aspect-[2/1]",
+  square: "aspect-square",
 };
 
 const frameClasses =
@@ -28,6 +30,11 @@ export default function MediaFrame({ image }: MediaFrameProps) {
             sizes="(min-width: 1024px) 800px, 100vw"
             className="object-cover"
           />
+          {image.annotation ? (
+            <p className="text-halo absolute left-3 top-3 -rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
+              {image.annotation}
+            </p>
+          ) : null}
         </div>
       ) : (
         <div className={`${frameClasses} ${aspectClass}`} aria-hidden="true" />

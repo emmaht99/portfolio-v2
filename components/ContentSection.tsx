@@ -1,3 +1,5 @@
+import { Squiggle } from "@/components/Doodles";
+
 type ContentSectionVariant = "challenge" | "process" | "outcome";
 
 type ContentSectionProps = {
@@ -6,6 +8,7 @@ type ContentSectionProps = {
   headingLevel?: "h2" | "h3";
   variant?: ContentSectionVariant;
   kicker?: string;
+  sketchbook?: boolean;
 };
 
 const SUBHEADING_MAX_LENGTH = 30;
@@ -24,6 +27,7 @@ export default function ContentSection({
   headingLevel = "h2",
   variant = "process",
   kicker,
+  sketchbook = false,
 }: ContentSectionProps) {
   const Heading = headingLevel;
   const chunks = content
@@ -46,6 +50,9 @@ export default function ContentSection({
         </p>
       ) : null}
       <Heading className="font-display text-h2 text-ink">{heading}</Heading>
+      {sketchbook ? (
+        <Squiggle className="-mt-2 h-3 w-32 text-highlight" />
+      ) : null}
       <div className="flex flex-col gap-4">
         {chunks.map((chunk, index) => {
           if (isSubheading(chunk)) {
