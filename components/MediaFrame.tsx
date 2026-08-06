@@ -13,6 +13,7 @@ const aspectBySize: Record<NonNullable<ProjectImage["size"]>, string> = {
   standard: "aspect-[4/3]",
   wide: "aspect-[2/1]",
   square: "aspect-square",
+  phone: "aspect-[405/841]",
 };
 
 const frameClasses =
@@ -31,6 +32,8 @@ const sizeClasses: Record<NonNullable<ProjectImageAnnotation["size"]>, string> =
 
 export default function MediaFrame({ image }: MediaFrameProps) {
   const aspectClass = aspectBySize[image?.size ?? "standard"];
+  const objectFitClass =
+    image?.size === "phone" ? "object-contain" : "object-cover";
 
   return (
     <figure className="flex flex-col gap-2">
@@ -42,7 +45,7 @@ export default function MediaFrame({ image }: MediaFrameProps) {
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 800px, 100vw"
-              className="object-cover"
+              className={objectFitClass}
             />
           </div>
 

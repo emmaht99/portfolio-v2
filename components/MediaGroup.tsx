@@ -13,11 +13,18 @@ export default function MediaGroup({
   if (images.length === 0) return null;
 
   const gapClass = emphasis === "feature" ? "gap-8" : "gap-6";
+  const isPhoneGroup = images.every((image) => image.size === "phone");
+  const columnsClass = isPhoneGroup
+    ? "grid-cols-2 sm:grid-cols-4"
+    : "grid-cols-1 sm:grid-cols-2";
+  const widthClass = isPhoneGroup ? "mx-auto w-full max-w-[220px]" : "";
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 ${gapClass}`}>
+    <div className={`grid ${columnsClass} ${gapClass}`}>
       {images.map((image, index) => (
-        <MediaFrame key={`${image.src}-${index}`} image={image} />
+        <div key={`${image.src}-${index}`} className={widthClass}>
+          <MediaFrame image={image} />
+        </div>
       ))}
     </div>
   );

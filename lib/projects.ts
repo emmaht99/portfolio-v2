@@ -27,7 +27,7 @@ export interface ProjectImage {
   caption?: string;
   annotations?: ProjectImageAnnotation[];
   section?: "challenge" | "process" | "outcome";
-  size?: "hero" | "large" | "standard" | "wide" | "square";
+  size?: "hero" | "large" | "standard" | "wide" | "square" | "phone";
   group?: string;
   afterHeading?: string;
 }
@@ -80,17 +80,20 @@ export const projects: Project[] = [
 
     titleNote: "translates to “guardian angel”",
 
+    prototypeLink:
+      "https://www.figma.com/proto/8zc4vgDHYOjZgGzaBzTArJ/Ny-Skytsengel-Prototype?node-id=0-1",
+
     heroImage: {
-      src: "/projects/skytsengel/mockup-transparent.png",
+      src: "/projects/skytsengel/mockup-hero.png",
       alt: "Mockup of the redesigned Skytsengel app interface",
       annotations: [
         {
           text: "custom redesigned logo",
-          className: "bottom-[20%] left-[6%] max-w-[7rem] rotate-[-22deg]",
+          className: "bottom-[16%] left-[2%] max-w-[7rem] rotate-[-24deg]",
         },
         {
           text: "home page",
-          className: "bottom-[28%] right-[10%] max-w-[6rem] rotate-[-8deg] text-right",
+          className: "bottom-[22%] right-[4%] max-w-[6rem] rotate-[-8deg] text-right",
         },
       ],
     },
@@ -171,7 +174,6 @@ export const projects: Project[] = [
     ],
 
     interviewPanel: {
-      note: "so many feel truly alone with it",
       groups: [
         {
           title: "Lived experience",
@@ -206,28 +208,28 @@ export const projects: Project[] = [
         src: "/projects/skytsengel/prototype-home.png",
         alt: "Home screen of the final Skytsengel prototype, with a daily supportive message and mindfulness content",
         section: "outcome",
-        size: "standard",
+        size: "phone",
         group: "Prototype screens",
       },
       {
         src: "/projects/skytsengel/prototype-knowledge.png",
         alt: "Knowledge about stalking section of the final Skytsengel prototype",
         section: "outcome",
-        size: "standard",
+        size: "phone",
         group: "Prototype screens",
       },
       {
         src: "/projects/skytsengel/prototype-groups.png",
         alt: "Moderated peer support group screen of the final Skytsengel prototype",
         section: "outcome",
-        size: "standard",
+        size: "phone",
         group: "Prototype screens",
       },
       {
         src: "/projects/skytsengel/prototype-log.png",
         alt: "Calendar-based incident log screen of the final Skytsengel prototype",
         section: "outcome",
-        size: "standard",
+        size: "phone",
         group: "Prototype screens",
       },
     ],

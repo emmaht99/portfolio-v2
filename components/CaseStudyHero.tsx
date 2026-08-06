@@ -22,7 +22,7 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
   if (heroImage) {
     return (
       <header className="w-full border-b border-neutral/20">
-        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-[1fr_1.3fr] md:gap-16 md:py-24">
+        <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-[0.7fr_1.9fr] md:gap-12 md:py-24">
           {sketchbook ? (
             <>
               <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
@@ -35,13 +35,13 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
           ) : null}
 
           <div className="flex flex-col gap-6">
-            <div className="flex flex-wrap items-start gap-3">
-              <h1 className="font-display text-h1 text-ink">{title}</h1>
+            <div className="flex flex-col gap-1">
               {titleNote ? (
-                <Scribble className="text-halo mt-2 max-w-[11rem] -rotate-2 font-handwritten text-lg leading-tight text-highlight">
+                <Scribble className="text-halo w-fit -rotate-2 font-handwritten text-lg leading-tight text-highlight">
                   {titleNote}
                 </Scribble>
               ) : null}
+              <h1 className="font-display text-h1 text-ink">{title}</h1>
             </div>
             {description ? <p className="max-w-md">{description}</p> : null}
             {prototypeLink ? (
@@ -57,7 +57,7 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
           </div>
 
           <div
-            className={`relative mx-auto w-full max-w-2xl ${sketchbook ? "pt-12" : ""}`}
+            className={`relative mx-auto w-full max-w-none ${sketchbook ? "pt-12" : ""}`}
           >
             {sketchbook ? (
               <Scribble className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
@@ -70,7 +70,7 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
                 src={heroImage.src}
                 alt={heroImage.alt}
                 fill
-                sizes="(min-width: 768px) 60vw, 95vw"
+                sizes="(min-width: 768px) 75vw, 95vw"
                 priority
                 className="object-contain"
               />
