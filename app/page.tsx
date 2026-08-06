@@ -20,6 +20,32 @@ function Sparkle({ className }: { className?: string }) {
   );
 }
 
+function Squiggle({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 280 20"
+      className={className}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M2 10 Q 40 2, 80 10 T 160 10 T 278 8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M2 15 Q 40 7, 80 15 T 160 15 T 278 13"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export default function Home() {
   const featuredProjects = featuredSlugs
     .map((slug) => projects.find((project) => project.slug === slug))
@@ -82,8 +108,20 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4">
-        <h2 className="font-display text-h2 text-ink">Featured Projects</h2>
+      <section className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 px-4">
+        <div>
+          <h2 className="font-display text-h2 text-ink">Featured Projects</h2>
+          <Squiggle className="h-3 w-40 text-highlight" />
+        </div>
+
+        <Sparkle className="absolute -left-10 top-24 hidden h-8 w-8 rotate-6 text-highlight lg:block" />
+        <Sparkle className="absolute -left-16 top-44 hidden h-6 w-6 -rotate-12 text-highlight lg:block" />
+        <Sparkle className="absolute -left-8 top-60 hidden h-5 w-5 rotate-3 text-highlight lg:block" />
+
+        <Sparkle className="absolute -right-10 top-28 hidden h-8 w-8 -rotate-6 text-highlight lg:block" />
+        <Sparkle className="absolute -right-16 top-48 hidden h-9 w-9 rotate-12 text-highlight lg:block" />
+        <Sparkle className="absolute -right-6 top-72 hidden h-5 w-5 -rotate-3 text-highlight lg:block" />
+
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <ProjectCard
