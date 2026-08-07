@@ -558,6 +558,10 @@ export const projects: Project[] = [
     year: 2024,
     description:
       "A custom wine label created for the release party of artist Kamilla Wigestrand's first single, 'Tekst meg når du er full'. The project translated the song's visual identity into a physical product experience.",
+    coverImage: {
+      src: "/projects/tmndef-wine-label/bottle-in-hand.png",
+      alt: "The finished wine bottle with its custom label, held up at the release party",
+    },
     role:
       "Visual Designer & Illustrator. I developed the illustration style, designed the wine label, created mockups, and produced the final physical product.",
     context:
@@ -577,7 +581,52 @@ export const projects: Project[] = [
       "Illustration\n\nI traced elements from the original cover image and transformed it into a custom line-art illustration style using Adobe Illustrator.\n\nDesign\n\nThe illustration was developed into a wine label design using Canva, focusing on creating a cohesive visual identity suitable for the physical product.\n\nPresentation\n\nI created product mockups in Photoshop and produced the final physical wine bottle by printing and applying the label.",
     outcome:
       "The final wine bottle was created as a personalized release-party artifact and shared by both the artist and the hosting bar on social media.\n\nThe project strengthened my understanding of translating digital design into physical experiences and adapting visual identities across different formats.",
-    images: [],
+    images: [
+      {
+        src: "/projects/tmndef-wine-label/original-cover.jpg",
+        alt: "Original single cover artwork for 'Tekst meg når du er full'",
+        caption: "The original single cover — the starting point for the illustration",
+        section: "challenge",
+        size: "square",
+      },
+      {
+        src: "/projects/tmndef-wine-label/illustration-outline.png",
+        alt: "Custom line-art illustration traced from the original cover photo",
+        caption: "The traced line-art illustration",
+        section: "process",
+        afterHeading: "Illustration",
+        size: "square",
+      },
+      {
+        src: "/projects/tmndef-wine-label/illustration-outline-inverted.jpg",
+        alt: "The line-art illustration rendered in white on a black background",
+        section: "process",
+        afterHeading: "Illustration",
+        size: "square",
+      },
+      {
+        src: "/projects/tmndef-wine-label/bottle-in-hand.png",
+        alt: "The finished wine bottle with its custom label, held up at the release party",
+        section: "outcome",
+        size: "large",
+      },
+      {
+        src: "/projects/tmndef-wine-label/label-final.png",
+        alt: "The finished wine label design, flat view",
+        caption: "The finished label design",
+        section: "outcome",
+        group: "outcome-proof",
+        size: "wide",
+      },
+      {
+        src: "/projects/tmndef-wine-label/release-party-repost.jpg",
+        alt: "Instagram story repost from the release party venue showing the wine bottle",
+        caption: "Reposted by the release party venue",
+        section: "outcome",
+        group: "outcome-proof",
+        size: "phone",
+      },
+    ],
   },
 ];
 
