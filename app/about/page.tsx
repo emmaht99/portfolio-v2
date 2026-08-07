@@ -292,6 +292,35 @@ export default function Page() {
               </Scribble>
             </div>
           </Sticker>
+
+          {/* Life drawing */}
+          <Sticker>
+            <div className="rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
+              <Image
+                src="/about/sketching.jpg"
+                alt="Sketching a classical statue from life at an art museum"
+                width={3024}
+                height={4032}
+                className="h-auto w-full max-w-[200px]"
+              />
+            </div>
+          </Sticker>
+
+          {/* Snowboarding */}
+          <Sticker>
+            <div className="relative -rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
+              <Image
+                src="/about/snowboarding.jpg"
+                alt="Selfie on a snowboard on a mountain, with snowy peaks in the background"
+                width={3024}
+                height={4032}
+                className="h-auto w-full max-w-[220px]"
+              />
+              <Scribble className="text-halo absolute -bottom-3 left-2 rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
+                snowboarding
+              </Scribble>
+            </div>
+          </Sticker>
         </div>
       </section>
     </main>
