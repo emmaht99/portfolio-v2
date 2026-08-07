@@ -5,8 +5,12 @@
   --canvas: #f7f4ef; /* warm ivory */
   --ink: #16233a; /* deep navy */
   --accent: #3e6fa6; /* sky blue */
-  --highlight: #ff1493; /* hot pink — large text / non-text emphasis only, see note below */
+  --highlight: #c11374; /* deep pink — WCAG AA text contrast (5.3:1) against canvas at any size */
   --neutral: #6b6459; /* warm gray */
+
+  /* Sticky header height, used to keep keyboard-focused/skip-linked content
+     from landing underneath the header (WCAG 2.4.11) */
+  --header-height: 108px;
 
   /* Typography tokens — mobile-first base sizes (REDESIGN_STRATEGY.md scale) */
   --text-display-size: 2.75rem; /* 44px */
@@ -65,6 +69,10 @@
   --text-body--line-height: var(--text-body-leading);
   --text-meta: var(--text-meta-size);
   --text-meta--line-height: var(--text-meta-leading);
+}
+
+html {
+  scroll-padding-top: var(--header-height);
 }
 
 body {

@@ -12,7 +12,7 @@ export default function GuidelineList({ items }: GuidelineListProps) {
       {items.map((item) => (
         <div key={item.code} className="flex flex-col gap-2">
           <p className="text-meta text-accent">{item.code}</p>
-          <h4 className="font-display text-h3 text-ink">{item.title}</h4>
+          <p className="font-display text-h3 text-ink">{item.title}</p>
           <p className="text-body text-neutral">{item.description}</p>
         </div>
       ))}

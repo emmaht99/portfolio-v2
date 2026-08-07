@@ -38,7 +38,7 @@ export default function ProcessTimeline({ stages }: ProcessTimelineProps) {
                 {String(index + 1).padStart(2, "0")}
               </p>
             </div>
-            <h4 className="font-display text-h3 text-ink">{stage.label}</h4>
+            <p className="font-display text-h3 text-ink">{stage.label}</p>
             <ul className="flex flex-col gap-1 text-body text-neutral">
               {stage.points.map((point) => (
                 <li key={point}>{point}</li>

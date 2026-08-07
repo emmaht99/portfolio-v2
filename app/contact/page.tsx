@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Scribble from "@/components/Scribble";
 import { Sparkle } from "@/components/Doodles";
 import { MailIcon, LinkedInIcon, GitHubIcon } from "@/components/SocialIcons";
+
+export const metadata: Metadata = {
+  title: "Contact",
+};
 
 const channels = [
   {
@@ -28,7 +33,7 @@ const channels = [
 
 export default function Page() {
   return (
-    <main className="flex flex-col gap-10 pb-24">
+    <main id="main-content" tabIndex={-1} className="flex flex-col gap-10 pb-24">
       <header className="relative w-full border-b border-neutral/20">
         <Sparkle className="absolute right-10 top-12 hidden h-8 w-8 rotate-12 text-highlight sm:block" />
         <Sparkle className="absolute right-24 top-28 hidden h-5 w-5 -rotate-6 text-highlight lg:block" />

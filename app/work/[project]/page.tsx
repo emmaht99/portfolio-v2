@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseStudyHero from "@/components/CaseStudyHero";
@@ -18,6 +19,14 @@ type SectionDef = {
   content?: string;
   images: ProjectImage[];
 };
+
+export async function generateMetadata(
+  props: PageProps<"/work/[project]">,
+): Promise<Metadata> {
+  const { project: slug } = await props.params;
+  const project = projects.find((candidate) => candidate.slug === slug);
+  return { title: project?.title ?? "Work" };
+}
 
 export default async function Page(props: PageProps<"/work/[project]">) {
   const { project: slug } = await props.params;
@@ -69,7 +78,7 @@ export default async function Page(props: PageProps<"/work/[project]">) {
       .some((chunk) => chunk.trim() === "Interviews") ?? false;
 
   return (
-    <main className="flex flex-col gap-16 pb-16">
+    <main id="main-content" tabIndex={-1} className="flex flex-col gap-16 pb-16">
       <CaseStudyHero project={project} />
 
       <div className="mx-auto w-full max-w-5xl px-4">

@@ -8,7 +8,7 @@ type HandwrittenUnderlineProps = {
 // background rather than a text-decoration, so it wraps correctly across
 // multiple lines instead of only underlining the last line of a span.
 const strokeTile =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='8'%3E%3Cpath d='M0 4.5 Q 22 3, 45 4.5 T 90 4' stroke='%23ff1493' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E";
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='8'%3E%3Cpath d='M0 4.5 Q 22 3, 45 4.5 T 90 4' stroke='%23c11374' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E";
 
 const underlineStyle: CSSProperties = {
   backgroundImage: `url("${strokeTile}")`,

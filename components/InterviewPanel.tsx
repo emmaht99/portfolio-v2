@@ -33,7 +33,7 @@ export default function InterviewPanel({ groups, note }: InterviewPanelProps) {
               className="flex flex-col gap-3 py-6 sm:flex-1 sm:px-6 sm:py-8"
             >
               <Icon className="h-7 w-7 text-accent" />
-              <h4 className="font-display text-h3 text-ink">{group.title}</h4>
+              <p className="font-display text-h3 text-ink">{group.title}</p>
               <ul className="flex flex-col gap-1 text-body text-neutral">
                 {group.points.map((point) => (
                   <li key={point}>{point}</li>

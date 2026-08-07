@@ -15,7 +15,7 @@ export default function Home() {
     );
 
   return (
-    <main className="flex flex-col gap-16 pb-16">
+    <main id="main-content" tabIndex={-1} className="flex flex-col gap-16 pb-16">
       <header className="w-full">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-8 md:grid-cols-2 md:gap-16 md:py-10">
           <div className="flex flex-col gap-4">

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import CollageVideo from "@/components/CollageVideo";
 import Scribble from "@/components/Scribble";
@@ -13,9 +14,13 @@ import {
   HandCircle,
 } from "@/components/Doodles";
 
+export const metadata: Metadata = {
+  title: "About",
+};
+
 export default function Page() {
   return (
-    <main className="flex flex-col gap-16 pb-16">
+    <main id="main-content" tabIndex={-1} className="flex flex-col gap-16 pb-16">
       <header className="relative w-full border-b border-neutral/20">
         <Sparkle className="absolute right-12 top-16 hidden h-8 w-8 rotate-12 text-highlight sm:block" />
         <Sparkle className="absolute right-32 top-32 hidden h-5 w-5 -rotate-6 text-highlight lg:block" />
