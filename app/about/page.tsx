@@ -1,9 +1,17 @@
 import Image from "next/image";
-import Button from "@/components/Button";
 import CollageVideo from "@/components/CollageVideo";
 import Scribble from "@/components/Scribble";
 import Sticker from "@/components/Sticker";
-import { Sparkle } from "@/components/Doodles";
+import {
+  Sparkle,
+  Heart,
+  Smiley,
+  Fish,
+  CoffeeCup,
+  Flower,
+  MusicNote,
+  HandCircle,
+} from "@/components/Doodles";
 
 export default function Page() {
   return (
@@ -18,9 +26,8 @@ export default function Page() {
             Beyond the canvas
           </h1>
           <p className="max-w-2xl">
-            I&apos;m a UX &amp; Product Designer who believes curiosity,
-            empathy, and exploration are essential parts of creating
-            meaningful experiences.
+            I believe curiosity, empathy, and exploration are essential parts
+            of creating meaningful experiences.
           </p>
           <p className="max-w-2xl">
             When I&apos;m not designing, you&apos;ll find me making or
@@ -39,7 +46,68 @@ export default function Page() {
         <Sparkle className="absolute -right-10 top-40 hidden h-9 w-9 -rotate-6 text-highlight lg:block" />
         <Sparkle className="absolute -right-6 top-96 hidden h-6 w-6 rotate-12 text-highlight lg:block" />
 
+        <Scribble className="text-halo mb-8 -ml-1 -rotate-2 self-start font-handwritten text-2xl text-highlight">
+          play around with my digi-stickers
+        </Scribble>
+
+        <div className="relative mx-auto mb-12 h-44 w-full max-w-xl">
+          <HandCircle className="absolute inset-0 h-full w-full text-highlight" />
+
+          <Sticker className="absolute left-[4%] top-[32%]">
+            <Sparkle className="h-8 w-8 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[15%] top-[68%]">
+            <Sparkle className="h-4 w-4 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[23%] top-[10%]">
+            <Smiley className="h-8 w-8 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[29%] top-[66%]">
+            <Fish className="h-7 w-7 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[45%] top-[6%]">
+            <Heart className="h-7 w-7 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[49%] top-[64%]">
+            <Flower className="h-7 w-7 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[65%] top-[12%]">
+            <MusicNote className="h-8 w-8 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[70%] top-[60%]">
+            <Sparkle className="h-6 w-6 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[84%] top-[28%]">
+            <CoffeeCup className="h-8 w-8 text-highlight" />
+          </Sticker>
+
+          <Sticker className="absolute left-[90%] top-[55%]">
+            <Sparkle className="h-4 w-4 text-highlight" />
+          </Sticker>
+        </div>
+
         <div className="flex flex-wrap items-start gap-x-8 gap-y-12">
+          {/* Iced latte video */}
+          <Sticker>
+            <div className="relative rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
+              <CollageVideo
+                src="/about/iced-latte.mp4"
+                className="h-auto w-full max-w-[200px]"
+              />
+              <Scribble className="text-halo absolute -bottom-3 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
+                make an iced latte with me
+              </Scribble>
+            </div>
+          </Sticker>
+
           {/* Painting cluster */}
           <Sticker>
             <div className="relative -rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
@@ -224,12 +292,6 @@ export default function Page() {
               </Scribble>
             </div>
           </Sticker>
-        </div>
-      </section>
-
-      <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 border-t border-neutral/20 px-4 pt-16">
-        <div>
-          <Button href="mailto:emma@tandle.no">Let&apos;s connect!</Button>
         </div>
       </section>
     </main>

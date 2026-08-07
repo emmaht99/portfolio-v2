@@ -2,6 +2,8 @@
 
 import { useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 
+let topZIndex = 1;
+
 type StickerProps = {
   children: ReactNode;
   className?: string;
@@ -10,6 +12,7 @@ type StickerProps = {
 export default function Sticker({ children, className }: StickerProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const [zIndex, setZIndex] = useState(0);
   const drag = useRef({ startX: 0, startY: 0, originX: 0, originY: 0 });
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -24,6 +27,8 @@ export default function Sticker({ children, className }: StickerProps) {
       originX: position.x,
       originY: position.y,
     };
+    topZIndex += 1;
+    setZIndex(topZIndex);
     setDragging(true);
   }
 
@@ -44,10 +49,17 @@ export default function Sticker({ children, className }: StickerProps) {
     setDragging(false);
   }
 
+  const positionClass = /\b(absolute|fixed|sticky|static)\b/.test(
+    className ?? "",
+  )
+    ? ""
+    : "relative";
+
   return (
     <div
-      className={`${className ?? ""} ${dragging ? "z-30 cursor-grabbing" : "z-0 cursor-grab"} touch-none select-none`}
+      className={`${positionClass} ${className ?? ""} ${dragging ? "cursor-grabbing" : "cursor-grab"} touch-none select-none`}
       style={{
+        zIndex: dragging ? 9999 : zIndex,
         transform: `translate(${position.x}px, ${position.y}px) scale(${dragging ? 1.05 : 1})`,
         filter: dragging
           ? "drop-shadow(0 12px 20px rgb(22 35 58 / 0.25))"
@@ -60,6 +72,7 @@ export default function Sticker({ children, className }: StickerProps) {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
+      onDragStart={(event) => event.preventDefault()}
     >
       {children}
     </div>

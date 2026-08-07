@@ -472,3 +472,220 @@ export function Loop({ className }: DoodleProps) {
     </svg>
   );
 }
+
+export function Smiley({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M16 4 C 21.5 4, 26.5 9, 26.5 15.5 C 26.5 21.5, 21.5 27, 16 27 C 10.5 27, 5.5 21.5, 5.5 15.5 C 5.5 9, 10.5 4, 16 4 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <circle cx="11.5" cy="14" r="1.3" fill="currentColor" stroke="none" />
+      <circle cx="20.5" cy="14" r="1.3" fill="currentColor" stroke="none" />
+      <path
+        d="M10.5 19 C 13 22, 19 22, 21.5 19"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Fish({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 20"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M4 10 C 7 4, 17 3.5, 23 10 C 17 16.5, 7 16, 4 10 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M23 10 L29.5 5 L28 10 L29.5 15 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <circle cx="9.5" cy="8.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function CoffeeCup({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M7 12 L23 12 L21.5 25.5 C 21.3 27, 20 28, 18.5 28 L11.5 28 C 10 28, 8.7 27, 8.5 25.5 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M23 14.5 C 27 14, 29.5 17, 28 20 C 27 22.3, 24.5 23, 22.7 22.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+      <path
+        d="M12 3.5 C 12 5.5, 14 5.5, 14 7.5 M17.5 3.5 C 17.5 5.5, 19.5 5.5, 19.5 7.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function HandCircle({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 220 220"
+      preserveAspectRatio="none"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M112 6 C 155 4, 202 30, 213 78 C 222 118, 210 162, 176 190 C 140 219, 84 218, 46 190 C 12 165, 2 118, 12 76 C 22 32, 69 8, 112 6 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
+export function Flower({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  const petal = "M16 16 C 13 14, 12 9, 16 5 C 20 9, 19 14, 16 16 Z";
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d={petal}
+        transform="rotate(0 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d={petal}
+        transform="rotate(72 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d={petal}
+        transform="rotate(144 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d={petal}
+        transform="rotate(216 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d={petal}
+        transform="rotate(288 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function MusicNote({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M8.5 24 C 8.5 21.7, 10.7 19.8, 13.3 19.8 C 15.9 19.8, 18 21.5, 18 23.6 C 18 25.9, 15.8 27.8, 13.2 27.8 C 10.6 27.8, 8.5 26.1, 8.5 24 Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <path
+        d="M17.7 24 L17.7 4.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+      <path
+        d="M17.7 4.5 C 20.5 5.5, 22 8, 21 11"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
