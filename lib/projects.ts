@@ -14,10 +14,10 @@ export type ProjectCategory =
   | "AI / Prototyping";
 
 export interface ProjectImageAnnotation {
-  text: string;
+  text?: string;
   className: string;
   size?: "base" | "lg" | "xl";
-  icon?: "book" | "lightbulb";
+  icon?: "book" | "lightbulb" | "thought";
   arrowClassName?: string;
 }
 
@@ -31,6 +31,8 @@ export interface ProjectImage {
   group?: string;
   afterHeading?: string;
   pairWithText?: boolean;
+  sideNote?: string;
+  compact?: boolean;
 }
 
 export interface ProcessStage {
@@ -256,17 +258,18 @@ export const projects: Project[] = [
       "A Master's thesis exploring how digital technology can support Caritas Denmark's senior communities, translated into six design guidelines and a clickable prototype for a community platform.",
 
     coverImage: {
-      src: "/projects/caritas-faellesskab/caritas fron page.png",
+      src: "/projects/caritas-faellesskab/sign-in-mockup.png",
       alt: "Sign-in screen of the Caritas Fællesskab platform concept",
     },
 
     heroImage: {
-      src: "/projects/caritas-faellesskab/caritas fron page.png",
+      src: "/projects/caritas-faellesskab/sign-in-mockup.png",
       alt: "Sign-in screen of the Caritas Fællesskab platform concept",
+      compact: true,
       annotations: [
         {
-          text: "quick sign-up, no public profile required",
-          className: "top-[46%] right-[2%] max-w-[9rem] rotate-[-3deg] text-right",
+          text: "created an app after project end, to show Caritas how they could implement the guidelines we created",
+          className: "top-[4%] right-[2%] max-w-[10rem] rotate-[2deg] text-right",
         },
       ],
     },
@@ -294,13 +297,13 @@ export const projects: Project[] = [
     ],
 
     challenge:
-      "Caritas Denmark's senior communities run on physical, in-person practices: walking together, creating together, gathering over coffee. Information about them, though, is scattered across Facebook groups, word of mouth, and paper flyers left at church, with sign-up details sometimes buried inside comment threads. New and less-connected members were the ones who paid for it, missing walks they'd looked forward to.\n\nThe challenge was designing a digital platform that could ==fix that fragmentation without asking members to trade their physical community for a digital one==. Our problem statement: how can we tailor digital technology to support senior communities, while acknowledging that every community is unique?",
+      "Caritas Denmark's senior communities meet in person: walking, crafting, gathering over coffee. But information about them lives scattered across Facebook, word of mouth, and paper flyers, with sign-up details often buried in comment threads. New and less-connected members were the ones who missed out.\n\nThe challenge was designing a digital platform that could ==fix that fragmentation without asking members to trade their physical community for a digital one==. Our problem statement: how can we tailor digital technology to support senior communities, while acknowledging that every community is unique?",
 
     process:
-      "Fieldwork\n\nOver two months, we joined Caritas Ramblers' weekly walks and Caritas Krea's workshops as participants, not researchers. We called our meetings conversations rather than interviews, held on participants' own terms, in their own environments, at their own pace.\n\nWe paired this with semi-structured interviews across seven community members, then coded the material with grounded theory to find patterns across the fieldwork and interviews together.\n\nCo-Design Workshop\n\nThe fieldwork left us with six hypotheses about what makes the community work. We tested them in a 90-minute workshop with four members and a Caritas coordinator, using picture cards, a value timeline, and scenario cards to get past small talk into what the community actually meant to people.\n\nChoosing a photo of a shared workshop table, one Krea member put it simply: “You don't always have a space in your daily life... coming to another place and being together, I think that's very important for the creative process.”",
+      "Fieldwork\n\nOver two months, we joined Caritas Ramblers' weekly walks and Caritas Krea's workshops as participants. We called our meetings conversations rather than interviews, held on participants' own terms, in their own environments, at their own pace.\n\nInterviews\n\nWe paired the fieldwork with semi-structured interviews across seven people, spanning Caritas Workers, Volunteers, and Participants, then coded the material with grounded theory to find patterns across both.\n\nCo-Design Workshop\n\nThe fieldwork left us with six hypotheses about what makes the community work. We tested them in a 90-minute workshop with four members and a Caritas coordinator, using picture cards, a value timeline, and scenario cards to get past small talk into what the community actually meant to people.\n\nChoosing a photo of a shared workshop table, one Krea member put it simply: “You don't always have a space in your daily life... coming to another place and being together, I think that's very important for the creative process.”",
 
     processFindings:
-      "Three things kept surfacing. Information was scattered across channels with no single source of truth. Voluntariness was the point, not a constraint: members chose Caritas specifically because, as one put it, “you can come and go as you please.” And despite the reliance on Facebook, several members actively avoided it, describing it as overwhelming rather than useful. These three patterns shaped the six guidelines below more than any single feature request did.",
+      "Three patterns stood out. Information had no single source of truth, spread thin across Facebook, word of mouth, and paper flyers. Members valued their freedom to come and go, choosing Caritas specifically for that flexibility: as one put it, “you can come and go as you please.” And despite relying on Facebook, several people actively avoided it, finding it more overwhelming than useful. Together, these patterns shaped the six guidelines below more than any single feature request could.",
 
     outcome:
       "The fieldwork and workshop converged on six tailored design guidelines for a unified Caritas platform: not a spec for an app, but a set of principles for keeping the existing community at the center of any digital solution.\n\nTo show how the guidelines could come together in practice, we designed Caritas Fællesskab, a clickable Figma prototype built directly on these six principles. It was presented to Caritas Denmark and members of both communities, who responded positively; Caritas is currently exploring the possibility of deploying the concept.\n\nA key learning was the importance of designing with communities rather than simply designing for them. The project strengthened my understanding of participatory design, ethical research, and building technology that respects relationships that already work.",
@@ -422,6 +425,8 @@ export const projects: Project[] = [
         size: "standard",
         afterHeading: "Fieldwork",
         pairWithText: true,
+        sideNote:
+          "learning the needs of the target group by embracing their environment is key to creating something useful",
       },
       {
         src: "/projects/caritas-faellesskab/workshop-timeline.jpg",
@@ -430,6 +435,14 @@ export const projects: Project[] = [
         section: "process",
         size: "hero",
         afterHeading: "Co-Design Workshop",
+        annotations: [
+          {
+            icon: "thought",
+            text: "all stakeholders putting our brains together and communicating our perspectives",
+            size: "lg",
+            className: "top-[4%] left-[102%] max-w-[10rem] rotate-[-2deg]",
+          },
+        ],
       },
       {
         src: "/projects/caritas-faellesskab/workshop-values.jpg",

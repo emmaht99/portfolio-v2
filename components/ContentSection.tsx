@@ -3,6 +3,7 @@ import { Loop } from "@/components/Doodles";
 import HandwrittenUnderline from "@/components/HandwrittenUnderline";
 import MediaFrame from "@/components/MediaFrame";
 import MediaGroup from "@/components/MediaGroup";
+import Scribble from "@/components/Scribble";
 import type { ProjectImage } from "@/lib/projects";
 
 type ContentSectionVariant = "challenge" | "process" | "outcome";
@@ -15,6 +16,7 @@ type ContentSectionProps = {
   kicker?: string;
   sketchbook?: boolean;
   mediaAfterHeading?: Record<string, ProjectImage[]>;
+  panelAfterHeading?: Record<string, ReactNode>;
   modelSlot?: ReactNode;
 };
 
@@ -49,6 +51,7 @@ export default function ContentSection({
   kicker,
   sketchbook = false,
   mediaAfterHeading,
+  panelAfterHeading,
   modelSlot,
 }: ContentSectionProps) {
   const Heading = headingLevel;
@@ -100,18 +103,29 @@ export default function ContentSection({
             inlineImages?.length === 1 && inlineImages[0].pairWithText
               ? inlineImages[0]
               : undefined;
+          const panelNode =
+            precedingChunk && isSubheading(precedingChunk)
+              ? panelAfterHeading?.[precedingChunk]
+              : undefined;
 
           if (pairedImage) {
             return (
-              <div
-                key={index}
-                className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 sm:gap-8"
-              >
-                <p className={isLede ? "text-h3" : undefined}>
-                  {renderWithHighlights(chunk)}
-                </p>
-                <MediaFrame image={pairedImage} />
-              </div>
+              <Fragment key={index}>
+                <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 sm:gap-8">
+                  <div className="flex flex-col gap-4">
+                    <p className={isLede ? "text-h3" : undefined}>
+                      {renderWithHighlights(chunk)}
+                    </p>
+                    {pairedImage.sideNote ? (
+                      <Scribble className="text-halo w-fit -rotate-1 font-handwritten text-lg leading-snug text-highlight">
+                        {pairedImage.sideNote}
+                      </Scribble>
+                    ) : null}
+                  </div>
+                  <MediaFrame image={pairedImage} />
+                </div>
+                {panelNode}
+              </Fragment>
             );
           }
 
@@ -123,6 +137,7 @@ export default function ContentSection({
               {inlineImages && inlineImages.length > 0 ? (
                 <MediaGroup images={inlineImages} emphasis="supporting" />
               ) : null}
+              {panelNode}
             </Fragment>
           );
         })}

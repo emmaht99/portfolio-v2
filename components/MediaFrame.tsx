@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Arrow, Book, Lightbulb } from "@/components/Doodles";
+import { Arrow, Book, Lightbulb, Thought } from "@/components/Doodles";
 import Scribble from "@/components/Scribble";
 import type { ProjectImage, ProjectImageAnnotation } from "@/lib/projects";
 
@@ -22,12 +22,19 @@ const frameClasses =
 const annotationIcons = {
   book: Book,
   lightbulb: Lightbulb,
+  thought: Thought,
 };
 
 const sizeClasses: Record<NonNullable<ProjectImageAnnotation["size"]>, string> = {
   base: "text-lg",
   lg: "text-xl",
   xl: "text-3xl",
+};
+
+const iconSizeClasses: Record<NonNullable<ProjectImageAnnotation["size"]>, string> = {
+  base: "h-6 w-6",
+  lg: "h-9 w-9",
+  xl: "h-12 w-12",
 };
 
 export default function MediaFrame({ image }: MediaFrameProps) {
@@ -49,30 +56,34 @@ export default function MediaFrame({ image }: MediaFrameProps) {
             />
           </div>
 
-          {image.annotations?.map((note) => {
+          {image.annotations?.map((note, index) => {
             const Icon = note.icon ? annotationIcons[note.icon] : null;
             return (
               <div
-                key={note.text}
+                key={note.text ?? `${note.className}-${index}`}
                 className={`pointer-events-none absolute flex items-center gap-1.5 ${note.className}`}
               >
                 {Icon ? (
-                  <Icon className="h-6 w-6 shrink-0 -rotate-6 text-highlight" />
+                  <Icon
+                    className={`shrink-0 -rotate-6 text-highlight ${iconSizeClasses[note.size ?? "base"]}`}
+                  />
                 ) : null}
-                <Scribble
-                  className={`text-halo font-handwritten leading-tight text-highlight ${sizeClasses[note.size ?? "base"]}`}
-                >
-                  {note.text}
-                </Scribble>
+                {note.text ? (
+                  <Scribble
+                    className={`text-halo font-handwritten leading-tight text-highlight ${sizeClasses[note.size ?? "base"]}`}
+                  >
+                    {note.text}
+                  </Scribble>
+                ) : null}
               </div>
             );
           })}
 
           {image.annotations
             ?.filter((note) => note.arrowClassName)
-            .map((note) => (
+            .map((note, index) => (
               <Arrow
-                key={`${note.text}-arrow`}
+                key={`${note.text ?? note.className}-arrow-${index}`}
                 className={`pointer-events-none absolute text-highlight ${note.arrowClassName}`}
               />
             ))}

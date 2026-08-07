@@ -69,7 +69,7 @@ export default function SiteHeader() {
 
   const workActive = isActive(pathname, "/work");
   const linkClasses = (active: boolean) =>
-    `hidden min-h-11 items-center justify-center px-3 font-sans text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:inline-flex ${
+    `hidden min-h-11 items-center justify-center px-3 font-sans text-sm transition-colors duration-200 hover:text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:inline-flex ${
       active ? "text-accent" : "text-ink"
     }`;
 
@@ -91,7 +91,7 @@ export default function SiteHeader() {
               <Link
                 href="/"
                 aria-label="Emma H. Tandle — Home"
-                className="inline-flex min-h-11 items-center font-display text-lg text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-h3"
+                className="inline-flex min-h-11 origin-center items-center font-display text-lg text-highlight transition-transform duration-200 ease-out motion-safe:hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-h3"
               >
                 Emma H. Tandle
               </Link>
@@ -144,7 +144,7 @@ export default function SiteHeader() {
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setOpen(false)}
-                    className={`flex min-h-11 w-full items-center px-4 font-sans text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                    className={`flex min-h-11 w-full items-center px-4 font-sans text-base transition-colors duration-200 hover:text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                       active ? "text-accent" : "text-ink"
                     }`}
                   >

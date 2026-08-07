@@ -14,6 +14,7 @@ type CaseStudySectionProps = {
   images: ProjectImage[];
   sketchbook?: boolean;
   modelSlot?: ReactNode;
+  panelAfterHeading?: Record<string, ReactNode>;
 };
 
 // Internal composition unit. Keeping this as a discriminated union (rather
@@ -81,6 +82,7 @@ export default function CaseStudySection({
   images,
   sketchbook = false,
   modelSlot,
+  panelAfterHeading,
 }: CaseStudySectionProps) {
   const blockImages = images.filter((image) => !image.afterHeading);
   const inlineImages = images.filter((image) => image.afterHeading);
@@ -105,6 +107,7 @@ export default function CaseStudySection({
                 variant={variant}
                 sketchbook={sketchbook}
                 mediaAfterHeading={mediaAfterHeading}
+                panelAfterHeading={panelAfterHeading}
                 modelSlot={modelSlot}
               />
             </div>

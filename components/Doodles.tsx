@@ -306,6 +306,45 @@ export function Chat({ className }: DoodleProps) {
   );
 }
 
+export function Thought({ className }: DoodleProps) {
+  const { ref, drawClassName } = useDrawOnScroll();
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 32 32"
+      className={`${drawClassName} ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M9 14 C9 10.5, 12 8, 15.5 8 C16.5 6, 18.5 5, 20.5 6 C23 5.5, 25.5 7.5, 25 10.5 C27.5 11, 28 14.5, 25.5 16 C26 19, 22.5 21, 20 19.5 C18 21.5, 14 21, 13 18.5 C9.5 18.5, 7.5 15, 9 14 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+      />
+      <circle
+        cx="8"
+        cy="23"
+        r="1.3"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        pathLength={1}
+      />
+      <circle
+        cx="5.3"
+        cy="26.5"
+        r="0.9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        pathLength={1}
+      />
+    </svg>
+  );
+}
+
 export function Person({ className }: DoodleProps) {
   const { ref, drawClassName } = useDrawOnScroll();
   return (

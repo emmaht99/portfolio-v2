@@ -20,7 +20,7 @@ export default function ProjectCard({
     <article>
       <Link
         href={`/work/${slug}`}
-        className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="block origin-center transition-transform duration-300 ease-out motion-safe:hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-neutral/10">
           {coverImage ? (

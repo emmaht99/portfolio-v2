@@ -22,7 +22,7 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
   if (heroImage) {
     return (
       <header className="w-full border-b border-neutral/20">
-        <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:grid-cols-[0.7fr_1.9fr] md:gap-12 md:py-24">
+        <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 py-16 md:grid-cols-[0.7fr_1.9fr] md:gap-8 md:py-24">
           {sketchbook ? (
             <>
               <Book className="pointer-events-none absolute -left-2 top-4 hidden h-10 w-10 -rotate-6 text-highlight sm:block" />
@@ -67,7 +67,9 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
               </Scribble>
             ) : null}
 
-            <div className="relative aspect-square w-full">
+            <div
+              className={`relative aspect-square w-full ${heroImage.compact ? "p-8 sm:p-12" : ""}`}
+            >
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
