@@ -60,7 +60,7 @@ function toArrayBuffer(buffer: Buffer): ArrayBuffer {
 }
 
 export default async function Image() {
-  const [displayFont, displayItalicFont, sansFont, handwrittenFont] = (
+  const [displayFont, displayItalicFont, sansFont, handwrittenFont, photo] =
     await Promise.all([
       readFile(
         join(
@@ -80,8 +80,13 @@ export default async function Image() {
       readFile(
         join(process.cwd(), "app/assets/fonts/Caveat-Static-SemiBold.ttf"),
       ),
-    ])
-  ).map(toArrayBuffer);
+      readFile(join(process.cwd(), "public/home/emma-louisiana.png")),
+    ]);
+  const [displayFontData, displayItalicFontData, sansFontData, handwrittenFontData] =
+    [displayFont, displayItalicFont, sansFont, handwrittenFont].map(
+      toArrayBuffer,
+    );
+  const photoDataUrl = `data:image/png;base64,${photo.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -90,65 +95,93 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
+          alignItems: "center",
           position: "relative",
           background: "#f7f4ef",
-          padding: "90px",
         }}
       >
-        <Sparkle top={64} right={110} sizePx={44} rotate={12} />
-        <Sparkle top={140} right={64} sizePx={26} rotate={-8} />
-        <Sparkle bottom={90} left={620} sizePx={30} rotate={6} />
+        {/* Decorative sparkles sit in the outer margin on purpose — some
+            unfurlers (Notion, iMessage) crop this canvas tighter than
+            1200x630, so nothing structural can live out here. */}
+        <Sparkle top={48} right={64} sizePx={30} rotate={12} />
+        <Sparkle bottom={56} right={96} sizePx={22} rotate={-8} />
 
         <div
           style={{
             display: "flex",
-            fontFamily: "Libre Baskerville",
-            fontSize: 40,
-            color: "#ff1493",
-            marginBottom: 56,
+            width: 350,
+            height: 460,
+            marginLeft: 88,
+            borderRadius: 20,
+            overflow: "hidden",
+            boxShadow: "0 16px 40px rgba(22, 35, 58, 0.22)",
           }}
         >
-          Emma H. Tandle
+          <img
+            src={photoDataUrl}
+            width={350}
+            height={460}
+            style={{ objectFit: "cover" }}
+          />
         </div>
 
         <div
           style={{
             display: "flex",
-            fontFamily: "DM Sans",
-            fontSize: 30,
-            color: "#16233a",
-            marginBottom: 8,
+            flexDirection: "column",
+            flex: 1,
+            padding: "0 88px 0 56px",
           }}
         >
-          Hi, I&apos;m Emma and I am a
-        </div>
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "Libre Baskerville",
+              fontSize: 28,
+              color: "#ff1493",
+              marginBottom: 22,
+            }}
+          >
+            Emma H. Tandle
+          </div>
 
-        <div
-          style={{
-            display: "flex",
-            fontFamily: "Libre Baskerville",
-            fontStyle: "italic",
-            fontSize: 94,
-            lineHeight: 1.1,
-            color: "#16233a",
-          }}
-        >
-          UX &amp; Product Designer
-        </div>
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "DM Sans",
+              fontSize: 22,
+              color: "#16233a",
+              marginBottom: 4,
+            }}
+          >
+            Hi, I&apos;m Emma and I am a
+          </div>
 
-        <div
-          style={{
-            display: "flex",
-            fontFamily: "Caveat",
-            fontSize: 36,
-            color: "#ff1493",
-            marginTop: 40,
-            transform: "rotate(-2deg)",
-          }}
-        >
-          welcome to my portfolio
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "Libre Baskerville",
+              fontStyle: "italic",
+              fontSize: 56,
+              lineHeight: 1.1,
+              color: "#16233a",
+            }}
+          >
+            UX &amp; Product Designer
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "Caveat",
+              fontSize: 28,
+              color: "#ff1493",
+              marginTop: 26,
+              transform: "rotate(-2deg)",
+            }}
+          >
+            welcome to my portfolio
+          </div>
         </div>
       </div>
     ),
@@ -157,25 +190,25 @@ export default async function Image() {
       fonts: [
         {
           name: "Libre Baskerville",
-          data: displayFont,
+          data: displayFontData,
           style: "normal",
           weight: 400,
         },
         {
           name: "Libre Baskerville",
-          data: displayItalicFont,
+          data: displayItalicFontData,
           style: "italic",
           weight: 400,
         },
         {
           name: "DM Sans",
-          data: sansFont,
+          data: sansFontData,
           style: "normal",
           weight: 400,
         },
         {
           name: "Caveat",
-          data: handwrittenFont,
+          data: handwrittenFontData,
           style: "normal",
           weight: 600,
         },

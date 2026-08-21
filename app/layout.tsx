@@ -26,13 +26,32 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const title = "Emma H. Tandle — UX & Product Designer";
+const description =
+  "Portfolio of Emma H. Tandle, a UX & Product Designer exploring research-driven digital experiences, interaction design, and emerging technology.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio.tandle.no"),
   title: {
-    default: "Emma H. Tandle — UX & Product Designer",
+    default: title,
     template: "%s — Emma H. Tandle",
   },
-  description:
-    "Portfolio of Emma H. Tandle, a UX & Product Designer exploring research-driven digital experiences, interaction design, and emerging technology.",
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: "Emma H. Tandle",
+    type: "website",
+  },
+  // Without an explicit card type, unfurlers that follow the Twitter Card
+  // spec (Notion included) default to "summary", which renders the image
+  // as a small, center-cropped square instead of the full 1200x630 og-image.
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
