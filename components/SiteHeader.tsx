@@ -85,7 +85,7 @@ export default function SiteHeader({ locale }: SiteHeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 bg-canvas">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-6 md:justify-center">
+      <div className="relative mx-auto flex max-w-5xl items-center justify-between px-4 py-6 md:justify-center">
         <nav aria-label="Primary">
           <ul className="flex items-center gap-2 md:gap-10">
             <li>
@@ -122,23 +122,27 @@ export default function SiteHeader({ locale }: SiteHeaderProps) {
                   </li>
                 );
               })}
-            <li className="hidden md:block">
-              <LanguageToggle locale={locale} />
-            </li>
           </ul>
         </nav>
 
-        <button
-          ref={toggleRef}
-          type="button"
-          aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((value) => !value)}
-          className="inline-flex min-h-11 min-w-11 items-center justify-center text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
-        >
-          <span aria-hidden="true">{open ? "✕" : "☰"}</span>
-        </button>
+        {/* Always visible, pinned to the header's right edge at every
+            breakpoint — not tucked into the mobile menu — so switching
+            language never requires opening the hamburger first. */}
+        <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-1">
+          <LanguageToggle locale={locale} />
+
+          <button
+            ref={toggleRef}
+            type="button"
+            aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((value) => !value)}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
+          >
+            <span aria-hidden="true">{open ? "✕" : "☰"}</span>
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -166,9 +170,6 @@ export default function SiteHeader({ locale }: SiteHeaderProps) {
                 </li>
               );
             })}
-            <li className="px-4 py-2">
-              <LanguageToggle locale={locale} />
-            </li>
           </ul>
         </nav>
       )}
