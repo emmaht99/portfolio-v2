@@ -1,45 +1,29 @@
 import type { Metadata } from "next";
-import { Libre_Baskerville, DM_Sans, Caveat } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
-import "./globals.css";
+import { fontVariables } from "@/lib/fonts";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import "../globals.css";
 
-const libreBaskerville = Libre_Baskerville({
-  variable: "--font-libre-baskerville",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["600"],
-  display: "swap",
-});
-
-const title = "Emma H. Tandle — UX & Product Designer";
-const description =
-  "Portfolio of Emma H. Tandle, a UX & Product Designer exploring research-driven digital experiences, interaction design, and emerging technology.";
+const locale = "en" as const;
+const dict = getDictionary(locale);
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio.tandle.no"),
   title: {
-    default: title,
-    template: "%s — Emma H. Tandle",
+    default: dict.site.defaultTitle,
+    template: dict.site.titleTemplate,
   },
-  description,
+  description: dict.site.description,
+  alternates: {
+    languages: {
+      en: "/",
+      no: "/no",
+    },
+  },
   openGraph: {
-    title,
-    description,
+    title: dict.site.defaultTitle,
+    description: dict.site.description,
     url: "/",
     siteName: "Emma H. Tandle",
     type: "website",
@@ -49,17 +33,14 @@ export const metadata: Metadata = {
   // as a small, center-cropped square instead of the full 1200x630 og-image.
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
+    title: dict.site.defaultTitle,
+    description: dict.site.description,
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${libreBaskerville.variable} ${dmSans.variable} ${caveat.variable} h-full antialiased`}
-    >
+    <html lang={locale} className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
@@ -67,9 +48,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
-        <SiteHeader />
+        <SiteHeader locale={locale} />
         {children}
-        <Footer />
+        <Footer locale={locale} />
       </body>
     </html>
   );

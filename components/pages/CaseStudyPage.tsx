@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseStudyHero from "@/components/CaseStudyHero";
@@ -9,7 +8,11 @@ import ProcessTimeline from "@/components/ProcessTimeline";
 import InterviewPanel from "@/components/InterviewPanel";
 import GuidelineList from "@/components/GuidelineList";
 import Scribble from "@/components/Scribble";
-import { projects, type ProjectImage } from "@/lib/projects";
+import type { ProjectImage } from "@/lib/projects";
+import type { Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getLocalizedProject, getLocalizedProjects } from "@/lib/i18n/localize-projects";
 
 type SectionVariant = "challenge" | "process" | "outcome";
 
@@ -20,17 +23,14 @@ type SectionDef = {
   images: ProjectImage[];
 };
 
-export async function generateMetadata(
-  props: PageProps<"/work/[project]">,
-): Promise<Metadata> {
-  const { project: slug } = await props.params;
-  const project = projects.find((candidate) => candidate.slug === slug);
-  return { title: project?.title ?? "Work" };
-}
+type CaseStudyPageProps = {
+  slug: string;
+  locale: Locale;
+};
 
-export default async function Page(props: PageProps<"/work/[project]">) {
-  const { project: slug } = await props.params;
-  const project = projects.find((candidate) => candidate.slug === slug);
+export default function CaseStudyPage({ slug, locale }: CaseStudyPageProps) {
+  const dict = getDictionary(locale);
+  const project = getLocalizedProject(slug, locale);
 
   if (!project) {
     notFound();
@@ -39,19 +39,19 @@ export default async function Page(props: PageProps<"/work/[project]">) {
   const sectionDefs: SectionDef[] = [
     {
       variant: "challenge",
-      heading: "Challenge",
+      heading: dict.caseStudy.challenge,
       content: project.challenge,
       images: project.images.filter((image) => image.section === "challenge"),
     },
     {
       variant: "process",
-      heading: "Process",
+      heading: dict.caseStudy.process,
       content: project.process,
       images: project.images.filter((image) => image.section === "process"),
     },
     {
       variant: "outcome",
-      heading: "Outcome",
+      heading: dict.caseStudy.outcome,
       content: project.outcome,
       images: project.images.filter((image) => image.section === "outcome"),
     },
@@ -64,22 +64,26 @@ export default async function Page(props: PageProps<"/work/[project]">) {
 
   const unassignedImages = project.images.filter((image) => !image.section);
 
-  const currentIndex = projects.findIndex(
+  const localizedProjects = getLocalizedProjects(locale);
+  const currentIndex = localizedProjects.findIndex(
     (candidate) => candidate.slug === project.slug,
   );
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const nextProject = localizedProjects[(currentIndex + 1) % localizedProjects.length];
 
-  // Interview panels inline themselves right after a matching "Interviews"
-  // subheading when the process copy has one; otherwise they fall back to
-  // sitting below the whole process section, as before.
-  const hasInterviewsHeading =
-    project.process
-      ?.split("\n\n")
-      .some((chunk) => chunk.trim() === "Interviews") ?? false;
+  // Interview panels inline themselves right after the subheading named by
+  // interviewPanel.headingAnchor (translated per-locale in lib/projects.no.ts),
+  // when the process copy has one; otherwise they fall back to sitting below
+  // the whole process section, as before.
+  const interviewsHeading = project.interviewPanel?.headingAnchor;
+  const hasInterviewsHeading = interviewsHeading
+    ? (project.process
+        ?.split("\n\n")
+        .some((chunk) => chunk.trim() === interviewsHeading) ?? false)
+    : false;
 
   return (
     <main id="main-content" tabIndex={-1} className="flex flex-col gap-16 pb-16">
-      <CaseStudyHero project={project} />
+      <CaseStudyHero project={project} locale={locale} />
 
       <div className="mx-auto w-full max-w-5xl px-4">
         <FactGrid
@@ -88,6 +92,7 @@ export default async function Page(props: PageProps<"/work/[project]">) {
           timeline={project.timeline}
           tools={project.tools}
           deliverables={project.deliverables}
+          locale={locale}
         />
       </div>
 
@@ -108,9 +113,10 @@ export default async function Page(props: PageProps<"/work/[project]">) {
             panelAfterHeading={
               section.variant === "process" &&
               project.interviewPanel &&
-              hasInterviewsHeading
+              hasInterviewsHeading &&
+              interviewsHeading
                 ? {
-                    Interviews: (
+                    [interviewsHeading]: (
                       <InterviewPanel
                         groups={project.interviewPanel.groups}
                         note={project.interviewPanel.note}
@@ -149,14 +155,16 @@ export default async function Page(props: PageProps<"/work/[project]">) {
       {project.sketchbook ? (
         <div className="mx-auto w-full max-w-5xl px-4">
           <Scribble className="text-halo w-fit -rotate-1 font-handwritten text-2xl text-highlight">
-            crossing my fingers that this will exist in the future!
+            {dict.caseStudy.sketchbookNote}
           </Scribble>
         </div>
       ) : null}
 
       {unassignedImages.length > 0 ? (
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4">
-          <h2 className="font-display text-h2 text-ink">Additional images</h2>
+          <h2 className="font-display text-h2 text-ink">
+            {dict.caseStudy.additionalImages}
+          </h2>
           <div className="flex flex-col gap-6">
             {unassignedImages.map((image) => (
               <MediaFrame key={image.src} image={image} />
@@ -168,7 +176,7 @@ export default async function Page(props: PageProps<"/work/[project]">) {
       <div className="mx-auto w-full max-w-5xl border-t border-neutral/20 px-4 pt-8">
         <div className="flex flex-col gap-8 py-8 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            href="/work"
+            href={localizePath("/work", locale)}
             className="group inline-flex min-h-11 items-center gap-2 font-sans text-sm text-ink underline underline-offset-2 transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <span
@@ -177,15 +185,17 @@ export default async function Page(props: PageProps<"/work/[project]">) {
             >
               ←
             </span>
-            Back to All Works
+            {dict.caseStudy.backToAllWorks}
           </Link>
 
           <Link
-            href={`/work/${nextProject.slug}`}
+            href={localizePath(`/work/${nextProject.slug}`, locale)}
             className="group inline-flex min-h-11 items-center justify-end gap-3 self-end focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <span className="flex flex-col items-end gap-0.5">
-              <span className="text-meta text-neutral">Next project</span>
+              <span className="text-meta text-neutral">
+                {dict.caseStudy.nextProjectLabel}
+              </span>
               <span className="font-display text-h3 text-ink transition-colors duration-200 group-hover:text-accent">
                 {nextProject.title}
               </span>

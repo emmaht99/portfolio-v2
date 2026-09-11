@@ -1,25 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
+import { localizePath, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type ProjectCardProps = {
   project: Project;
+  locale: Locale;
   priority?: boolean;
   headingLevel?: "h2" | "h3";
 };
 
 export default function ProjectCard({
   project,
+  locale,
   priority = false,
   headingLevel = "h3",
 }: ProjectCardProps) {
   const { title, slug, category, year, description, coverImage, tools } = project;
   const Heading = headingLevel;
+  const dict = getDictionary(locale);
 
   return (
     <article>
       <Link
-        href={`/work/${slug}`}
+        href={localizePath(`/work/${slug}`, locale)}
         className="block origin-center transition-transform duration-300 ease-out motion-safe:hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-neutral/10">
@@ -37,7 +42,7 @@ export default function ProjectCard({
 
         <div className="flex flex-col gap-2 py-4">
           <p className="text-meta text-neutral">
-            {category}
+            {dict.work.categories[category]}
             {year ? ` · ${year}` : ""}
           </p>
 
@@ -54,7 +59,8 @@ export default function ProjectCard({
           ) : null}
 
           <span className="text-meta font-medium text-accent">
-            View case study<span aria-hidden="true"> →</span>
+            {dict.work.viewCaseStudy}
+            <span aria-hidden="true"> →</span>
           </span>
         </div>
       </Link>

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import CollageVideo from "@/components/CollageVideo";
 import Scribble from "@/components/Scribble";
@@ -13,12 +12,16 @@ import {
   MusicNote,
   HandCircle,
 } from "@/components/Doodles";
+import type { Locale } from "@/lib/i18n/config";
+import { getAboutContent } from "@/lib/i18n/about-content";
 
-export const metadata: Metadata = {
-  title: "About",
+type AboutPageProps = {
+  locale: Locale;
 };
 
-export default function Page() {
+export default function AboutPage({ locale }: AboutPageProps) {
+  const content = getAboutContent(locale);
+
   return (
     <main id="main-content" tabIndex={-1} className="flex flex-col gap-16 pb-16">
       <header className="relative w-full border-b border-neutral/20">
@@ -28,20 +31,10 @@ export default function Page() {
 
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-24 sm:py-32">
           <h1 className="max-w-3xl font-display text-display text-ink">
-            Beyond the canvas
+            {content.heading}
           </h1>
-          <p className="max-w-2xl">
-            I believe curiosity, empathy, and exploration are essential parts
-            of creating meaningful experiences.
-          </p>
-          <p className="max-w-2xl">
-            When I&apos;m not designing, you&apos;ll find me making or
-            drinking coffee, caught up in conversation, or diving into a new
-            hobby, usually related to creating something! I believe that the
-            best insights come from staying curious and engaging with the
-            world around me. This collage is a small window into the moments
-            and perspectives that fuel my creativity.
-          </p>
+          <p className="max-w-2xl">{content.intro1}</p>
+          <p className="max-w-2xl">{content.intro2}</p>
         </div>
       </header>
 
@@ -52,7 +45,7 @@ export default function Page() {
         <Sparkle className="absolute -right-6 top-96 hidden h-6 w-6 rotate-12 text-highlight lg:block" />
 
         <Scribble className="text-halo mb-8 -ml-1 -rotate-2 self-start font-handwritten text-2xl text-highlight">
-          play around with my digi-stickers
+          {content.stickerHint}
         </Scribble>
 
         <div className="relative mx-auto mb-12 h-44 w-full max-w-xl">
@@ -108,7 +101,7 @@ export default function Page() {
                 className="h-auto w-full max-w-[200px]"
               />
               <Scribble className="text-halo absolute -bottom-3 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                make an iced latte with me
+                {content.captions.icedLatte}
               </Scribble>
             </div>
           </Sticker>
@@ -118,14 +111,14 @@ export default function Page() {
             <div className="relative -rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/abstract-painting.png"
-                alt="An abstract acrylic painting in warm pinks, blues, and purples"
+                alt={content.alts.painting}
                 width={2279}
                 height={1618}
                 priority
                 className="h-auto w-full max-w-md"
               />
               <Scribble className="text-halo absolute -bottom-3 left-2 -rotate-3 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                painting
+                {content.captions.painting}
               </Scribble>
             </div>
           </Sticker>
@@ -134,7 +127,7 @@ export default function Page() {
             <div className="rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/watercolor-fish.jpg"
-                alt="Watercolor painting of four colorful fish"
+                alt={content.alts.watercolorFish}
                 width={801}
                 height={2051}
                 className="h-auto w-full max-w-[140px]"
@@ -146,7 +139,7 @@ export default function Page() {
             <div className="-rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/watercolor-red-panda.jpg"
-                alt="Watercolor painting of a red panda"
+                alt={content.alts.watercolorRedPanda}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[180px]"
@@ -159,13 +152,13 @@ export default function Page() {
             <div className="relative rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/bunad-waterfront.jpg"
-                alt="Standing by the waterfront in traditional Norwegian bunad, with a Norwegian flag"
+                alt={content.alts.bunadWaterfront}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[220px]"
               />
               <Scribble className="text-halo absolute -top-3 -right-2 rotate-6 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                bunad
+                {content.captions.bunad}
               </Scribble>
             </div>
           </Sticker>
@@ -174,7 +167,7 @@ export default function Page() {
             <div className="-rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/bunad-bus.jpg"
-                alt="Candid photo on a bus, wearing traditional Norwegian bunad"
+                alt={content.alts.bunadBus}
                 width={1244}
                 height={2208}
                 className="h-auto w-full max-w-[180px]"
@@ -187,13 +180,13 @@ export default function Page() {
             <div className="relative rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/latte-art.jpg"
-                alt="A latte with swan-shaped latte art"
+                alt={content.alts.latteArt}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[220px]"
               />
               <Scribble className="text-halo absolute -bottom-4 right-1 rotate-3 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                making latteart
+                {content.captions.latteArt}
               </Scribble>
             </div>
           </Sticker>
@@ -202,7 +195,7 @@ export default function Page() {
             <div className="-rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/latte-art-two.jpg"
-                alt="Holding a latte with rosette latte art up against a grassy, flowering field"
+                alt={content.alts.latteArtTwo}
                 width={1242}
                 height={2208}
                 className="h-auto w-full max-w-[160px]"
@@ -218,7 +211,7 @@ export default function Page() {
                 className="h-auto w-full max-w-[200px]"
               />
               <Scribble className="text-halo absolute -bottom-3 left-0 -rotate-3 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                playing muuuusic
+                {content.captions.music}
               </Scribble>
             </div>
           </Sticker>
@@ -228,13 +221,13 @@ export default function Page() {
             <div className="relative rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/singing.jpg"
-                alt="Singing on keyboard and guitar with a band at an outdoor evening show"
+                alt={content.alts.singing}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[220px]"
               />
               <Scribble className="text-halo absolute -top-3 left-2 rotate-3 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                singing
+                {content.captions.singing}
               </Scribble>
             </div>
           </Sticker>
@@ -243,7 +236,7 @@ export default function Page() {
             <div className="-rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/singing-at-idyll.jpg"
-                alt="Singing on stage in a pink dress with a festival backdrop"
+                alt={content.alts.singingAtIdyll}
                 width={1170}
                 height={1651}
                 className="h-auto w-full max-w-[160px]"
@@ -256,13 +249,13 @@ export default function Page() {
             <div className="relative -rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/handcraft.jpg"
-                alt="Shaping a clay sculpture by hand at a pottery studio"
+                alt={content.alts.handcraft}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[200px]"
               />
               <Scribble className="text-halo absolute -bottom-3 right-2 -rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                getting crafty
+                {content.captions.craft}
               </Scribble>
             </div>
           </Sticker>
@@ -271,13 +264,13 @@ export default function Page() {
             <div className="relative rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/knitting.jpg"
-                alt="A half-finished mohair knitting project resting on a sketchbook with knitting notes"
+                alt={content.alts.knitting}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[180px]"
               />
               <Scribble className="text-halo absolute -bottom-3 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                knitting
+                {content.captions.knitting}
               </Scribble>
             </div>
           </Sticker>
@@ -287,13 +280,13 @@ export default function Page() {
             <div className="relative -rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/good-book.jpg"
-                alt="Reading a novel with sunlight casting a rainbow across the pages"
+                alt={content.alts.goodBook}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[200px]"
               />
               <Scribble className="text-halo absolute -top-4 right-2 -rotate-6 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                a good book
+                {content.captions.book}
               </Scribble>
             </div>
           </Sticker>
@@ -303,7 +296,7 @@ export default function Page() {
             <div className="rotate-1 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/sketching.jpg"
-                alt="Sketching a classical statue from life at an art museum"
+                alt={content.alts.sketching}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[200px]"
@@ -316,13 +309,13 @@ export default function Page() {
             <div className="relative -rotate-2 border border-neutral/20 bg-canvas p-2 shadow-sm">
               <Image
                 src="/about/snowboarding.jpg"
-                alt="Selfie on a snowboard on a mountain, with snowy peaks in the background"
+                alt={content.alts.snowboarding}
                 width={3024}
                 height={4032}
                 className="h-auto w-full max-w-[220px]"
               />
               <Scribble className="text-halo absolute -bottom-3 left-2 rotate-2 whitespace-nowrap font-handwritten text-2xl text-highlight">
-                snowboarding
+                {content.captions.snowboarding}
               </Scribble>
             </div>
           </Sticker>

@@ -1,3 +1,6 @@
+import type { Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+
 type FactGridProps = {
   role?: string;
   context?: string;
@@ -5,6 +8,7 @@ type FactGridProps = {
   team?: string;
   tools?: string[];
   deliverables?: string[];
+  locale: Locale;
 };
 
 type Fact =
@@ -18,17 +22,19 @@ export default function FactGrid({
   team,
   tools,
   deliverables,
+  locale,
 }: FactGridProps) {
+  const dict = getDictionary(locale);
   const facts: Fact[] = [
-    role ? { label: "Role", kind: "text", value: role } : null,
-    context ? { label: "Context", kind: "text", value: context } : null,
-    timeline ? { label: "Timeline", kind: "text", value: timeline } : null,
-    team ? { label: "Team", kind: "text", value: team } : null,
+    role ? { label: dict.factGrid.role, kind: "text", value: role } : null,
+    context ? { label: dict.factGrid.context, kind: "text", value: context } : null,
+    timeline ? { label: dict.factGrid.timeline, kind: "text", value: timeline } : null,
+    team ? { label: dict.factGrid.team, kind: "text", value: team } : null,
     tools && tools.length > 0
-      ? { label: "Tools", kind: "list", value: tools }
+      ? { label: dict.factGrid.tools, kind: "list", value: tools }
       : null,
     deliverables && deliverables.length > 0
-      ? { label: "Deliverables", kind: "list", value: deliverables }
+      ? { label: dict.factGrid.deliverables, kind: "list", value: deliverables }
       : null,
   ].filter((fact): fact is Fact => fact !== null);
 

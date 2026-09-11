@@ -3,22 +3,32 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
-];
+import LanguageToggle from "@/components/LanguageToggle";
+import { localizePath, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function SiteHeader() {
+type SiteHeaderProps = {
+  locale: Locale;
+};
+
+export default function SiteHeader({ locale }: SiteHeaderProps) {
   const pathname = usePathname();
+  const dict = getDictionary(locale);
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+
+  const navLinks = [
+    { href: localizePath("/work", locale), label: dict.nav.work },
+    { href: localizePath("/about", locale), label: dict.nav.about },
+  ];
+  const workHref = localizePath("/work", locale);
+  const homeHref = localizePath("/", locale);
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -67,7 +77,7 @@ export default function SiteHeader() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
-  const workActive = isActive(pathname, "/work");
+  const workActive = isActive(pathname, workHref);
   const linkClasses = (active: boolean) =>
     `hidden min-h-11 items-center justify-center px-3 font-sans text-sm transition-colors duration-200 hover:text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:inline-flex ${
       active ? "text-accent" : "text-ink"
@@ -80,24 +90,24 @@ export default function SiteHeader() {
           <ul className="flex items-center gap-2 md:gap-10">
             <li>
               <Link
-                href="/work"
+                href={workHref}
                 aria-current={workActive ? "page" : undefined}
                 className={linkClasses(workActive)}
               >
-                Work
+                {dict.nav.work}
               </Link>
             </li>
             <li>
               <Link
-                href="/"
-                aria-label="Emma H. Tandle — Home"
+                href={homeHref}
+                aria-label={dict.nav.homeAriaLabel}
                 className="inline-flex min-h-11 origin-center items-center font-display text-lg text-highlight transition-transform duration-200 ease-out motion-safe:hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-h3"
               >
                 Emma H. Tandle
               </Link>
             </li>
             {navLinks
-              .filter((link) => link.href !== "/work")
+              .filter((link) => link.href !== workHref)
               .map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
@@ -112,13 +122,16 @@ export default function SiteHeader() {
                   </li>
                 );
               })}
+            <li className="hidden md:block">
+              <LanguageToggle locale={locale} />
+            </li>
           </ul>
         </nav>
 
         <button
           ref={toggleRef}
           type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
@@ -153,6 +166,9 @@ export default function SiteHeader() {
                 </li>
               );
             })}
+            <li className="px-4 py-2">
+              <LanguageToggle locale={locale} />
+            </li>
           </ul>
         </nav>
       )}

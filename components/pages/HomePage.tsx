@@ -3,11 +3,19 @@ import Button from "@/components/Button";
 import ProjectCard from "@/components/ProjectCard";
 import { Sparkle, Squiggle } from "@/components/Doodles";
 import Scribble from "@/components/Scribble";
-import { projects } from "@/lib/projects";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getLocalizedProjects } from "@/lib/i18n/localize-projects";
+import type { Locale } from "@/lib/i18n/config";
 
 const featuredSlugs = ["skytsengel", "caritas-faellesskab", "deichman-wrapped"];
 
-export default function Home() {
+type HomePageProps = {
+  locale: Locale;
+};
+
+export default function HomePage({ locale }: HomePageProps) {
+  const dict = getDictionary(locale);
+  const projects = getLocalizedProjects(locale);
   const featuredProjects = featuredSlugs
     .map((slug) => projects.find((project) => project.slug === slug))
     .filter((project): project is NonNullable<typeof project> =>
@@ -20,15 +28,14 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-4 py-8 md:grid-cols-2 md:gap-16 md:py-10">
           <div className="flex flex-col gap-4">
             <Scribble className="-ml-2 -rotate-3 font-handwritten text-xl text-highlight md:-ml-6">
-              I design digital experiences that connect people, communities,
-              and technology.
+              {dict.home.scribbleIntro}
             </Scribble>
 
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm shadow-md md:mx-0">
               <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src="/home/emma-louisiana.png"
-                  alt="Emma standing in a gallery, looking at a sculpture beside a wall of windows overlooking trees"
+                  alt={dict.home.heroImageAlt}
                   fill
                   sizes="(min-width: 768px) 40vw, 90vw"
                   priority
@@ -50,25 +57,23 @@ export default function Home() {
           <div className="relative flex flex-col gap-6">
             <Sparkle className="absolute -right-2 -top-4 hidden h-7 w-7 rotate-6 text-highlight sm:block" />
 
-            <p className="font-sans text-lg text-ink">
-              Hi my name is Emma and I am a
-            </p>
+            <p className="font-sans text-lg text-ink">{dict.home.greeting}</p>
 
             <h1 className="font-display text-h1 italic text-ink">
-              UX &amp; Product Designer
+              {dict.home.heroTitle}
             </h1>
 
-            <p className="max-w-md">Welcome to my portfolio!</p>
+            <p className="max-w-md">{dict.home.welcome}</p>
 
             <div className="relative">
               <Button href="/contact" className="rounded-full">
-                Contact
+                {dict.home.contactCta}
               </Button>
               <Sparkle className="absolute -right-6 -top-3 h-5 w-5 rotate-12 text-highlight" />
             </div>
 
             <Scribble className="font-handwritten -rotate-2 self-end text-2xl text-highlight">
-              scroll down to see my work
+              {dict.home.scrollHint}
             </Scribble>
           </div>
         </div>
@@ -76,7 +81,7 @@ export default function Home() {
 
       <section className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 px-4">
         <div className="relative">
-          <h2 className="font-display text-h2 text-ink">Featured Projects</h2>
+          <h2 className="font-display text-h2 text-ink">{dict.home.featuredHeading}</h2>
           <Squiggle className="h-3 w-40 text-highlight" />
           <Sparkle className="absolute -right-1 -top-3 h-6 w-6 rotate-12 text-highlight sm:hidden" />
           <Sparkle className="absolute right-16 top-0 hidden h-6 w-6 -rotate-6 text-highlight sm:block lg:hidden" />
@@ -97,6 +102,7 @@ export default function Home() {
             <ProjectCard
               key={project.slug}
               project={project}
+              locale={locale}
               priority={index === 0}
               headingLevel="h3"
             />

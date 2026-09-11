@@ -74,10 +74,19 @@ export interface Project {
   processFindings?: string;
   outcome?: string;
   processTimeline?: ProcessStage[];
-  interviewPanel?: { groups: InterviewGroup[]; note?: string };
+  interviewPanel?: InterviewPanelData;
   guidelines?: ProjectGuideline[];
   images: ProjectImage[];
   prototypeLink?: string;
+}
+
+// The interview panel is anchored to whichever subheading matches this text
+// (see ContentSection's subheading detection), rather than being hardcoded,
+// so a translation can point it at its own translated subheading.
+export interface InterviewPanelData {
+  groups: InterviewGroup[];
+  note?: string;
+  headingAnchor?: string;
 }
 
 export const projects: Project[] = [
@@ -345,6 +354,7 @@ export const projects: Project[] = [
     ],
 
     interviewPanel: {
+      headingAnchor: "Interviews",
       note: "roles blur constantly: participants become volunteers, and volunteers stay participants",
       groups: [
         {

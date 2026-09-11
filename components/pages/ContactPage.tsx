@@ -1,37 +1,40 @@
-import type { Metadata } from "next";
 import Scribble from "@/components/Scribble";
 import { Sparkle } from "@/components/Doodles";
 import { MailIcon, LinkedInIcon, GitHubIcon } from "@/components/SocialIcons";
+import type { Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Contact",
+type ContactPageProps = {
+  locale: Locale;
 };
 
-const channels = [
-  {
-    label: "Email",
-    value: "emma@tandle.no",
-    href: "mailto:emma@tandle.no",
-    icon: MailIcon,
-    external: false,
-  },
-  {
-    label: "LinkedIn",
-    value: "@emmatandle",
-    href: "https://www.linkedin.com/in/emmatandle/",
-    icon: LinkedInIcon,
-    external: true,
-  },
-  {
-    label: "GitHub",
-    value: "@emmaht99",
-    href: "https://github.com/emmaht99/",
-    icon: GitHubIcon,
-    external: true,
-  },
-];
+export default function ContactPage({ locale }: ContactPageProps) {
+  const dict = getDictionary(locale);
 
-export default function Page() {
+  const channels = [
+    {
+      label: dict.contact.channels.email,
+      value: "emma@tandle.no",
+      href: "mailto:emma@tandle.no",
+      icon: MailIcon,
+      external: false,
+    },
+    {
+      label: dict.contact.channels.linkedin,
+      value: "@emmatandle",
+      href: "https://www.linkedin.com/in/emmatandle/",
+      icon: LinkedInIcon,
+      external: true,
+    },
+    {
+      label: dict.contact.channels.github,
+      value: "@emmaht99",
+      href: "https://github.com/emmaht99/",
+      icon: GitHubIcon,
+      external: true,
+    },
+  ];
+
   return (
     <main id="main-content" tabIndex={-1} className="flex flex-col gap-10 pb-24">
       <header className="relative w-full border-b border-neutral/20">
@@ -40,17 +43,14 @@ export default function Page() {
 
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-16 sm:py-20">
           <Scribble className="-ml-1 -rotate-2 font-handwritten text-xl text-highlight">
-            say hello
+            {dict.contact.sayHello}
           </Scribble>
 
           <h1 className="max-w-3xl font-display text-display text-ink">
-            Let&apos;s talk
+            {dict.contact.heading}
           </h1>
 
-          <p className="max-w-2xl">
-            Whether you have a project in mind, a question about my work, or
-            just want to say hi, I&apos;d love to hear from you.
-          </p>
+          <p className="max-w-2xl">{dict.contact.intro}</p>
         </div>
       </header>
 
@@ -70,7 +70,7 @@ export default function Page() {
                   <p className="text-neutral">{value}</p>
                 </div>
                 {external ? (
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only">{dict.footer.opensInNewTab}</span>
                 ) : null}
               </a>
             </li>
@@ -80,8 +80,7 @@ export default function Page() {
 
       <section className="mx-auto w-full max-w-5xl px-4">
         <Scribble className="-ml-1 rotate-1 font-handwritten text-2xl text-highlight">
-          As a former barista, I will never say no to a cup of coffee *wink
-          wink*
+          {dict.contact.joke}
         </Scribble>
       </section>
     </main>

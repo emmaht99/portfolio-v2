@@ -3,12 +3,16 @@ import Button from "@/components/Button";
 import { Book, Lines, Sparkle } from "@/components/Doodles";
 import Scribble from "@/components/Scribble";
 import type { Project } from "@/lib/projects";
+import type { Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type CaseStudyHeroProps = {
   project: Project;
+  locale: Locale;
 };
 
-export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
+export default function CaseStudyHero({ project, locale }: CaseStudyHeroProps) {
+  const dict = getDictionary(locale);
   const {
     title,
     description,
@@ -46,12 +50,17 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
             {description ? <p className="max-w-md">{description}</p> : null}
             {prototypeLink ? (
               <div className="relative inline-flex w-fit flex-col">
-                <Button href={prototypeLink} external className="rounded-full">
-                  View live prototype
+                <Button
+                  href={prototypeLink}
+                  external
+                  externalLabel={dict.footer.opensInNewTab}
+                  className="rounded-full"
+                >
+                  {dict.caseStudy.viewLivePrototype}
                 </Button>
                 {sketchbook ? (
                   <Scribble className="text-halo absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-2 whitespace-nowrap font-handwritten text-xl text-highlight">
-                    try it out!
+                    {dict.caseStudy.tryItOut}
                   </Scribble>
                 ) : null}
               </div>
@@ -63,7 +72,7 @@ export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
           >
             {sketchbook ? (
               <Scribble className="text-halo absolute -top-4 right-2 max-w-[11rem] -rotate-2 text-right font-handwritten text-xl leading-tight text-highlight">
-                a little peek into the experience
+                {dict.caseStudy.peekCaption}
               </Scribble>
             ) : null}
 

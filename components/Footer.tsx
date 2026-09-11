@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Sparkle } from "@/components/Doodles";
 import { MailIcon, LinkedInIcon, GitHubIcon } from "@/components/SocialIcons";
+import { localizePath, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 const iconLinkClasses =
   "group inline-flex min-h-11 items-center gap-2 text-ink transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
@@ -8,7 +10,13 @@ const iconLinkClasses =
 const footerNavClasses =
   "inline-flex min-h-11 items-center font-sans text-sm text-ink transition-colors duration-200 hover:text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-export default function Footer() {
+type FooterProps = {
+  locale: Locale;
+};
+
+export default function Footer({ locale }: FooterProps) {
+  const dict = getDictionary(locale);
+
   return (
     <footer className="relative border-t border-neutral/20">
       <Sparkle className="absolute left-10 top-8 hidden h-6 w-6 -rotate-6 text-highlight lg:block" />
@@ -19,28 +27,25 @@ export default function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-2">
             <p className="font-display text-h3 text-ink">Emma Helene Tandle</p>
-            <p className="max-w-xs text-neutral">
-              UX &amp; Product Designer exploring research-driven digital
-              experiences.
-            </p>
+            <p className="max-w-xs text-neutral">{dict.footer.tagline}</p>
           </div>
 
           <div className="flex flex-col gap-8 sm:flex-row sm:gap-16">
             <nav aria-label="Footer">
               <ul className="flex flex-col gap-2">
                 <li>
-                  <Link href="/work" className={footerNavClasses}>
-                    Work
+                  <Link href={localizePath("/work", locale)} className={footerNavClasses}>
+                    {dict.nav.work}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className={footerNavClasses}>
-                    About
+                  <Link href={localizePath("/about", locale)} className={footerNavClasses}>
+                    {dict.nav.about}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className={footerNavClasses}>
-                    Contact
+                  <Link href={localizePath("/contact", locale)} className={footerNavClasses}>
+                    {dict.contact.metaTitle}
                   </Link>
                 </li>
               </ul>
@@ -62,7 +67,7 @@ export default function Footer() {
                 >
                   <LinkedInIcon />
                   LinkedIn
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only">{dict.footer.opensInNewTab}</span>
                 </a>
               </li>
               <li>
@@ -74,7 +79,7 @@ export default function Footer() {
                 >
                   <GitHubIcon />
                   GitHub
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only">{dict.footer.opensInNewTab}</span>
                 </a>
               </li>
             </ul>
@@ -89,7 +94,8 @@ export default function Footer() {
             href="#"
             className="inline-flex min-h-11 items-center text-meta text-neutral transition-colors duration-200 hover:text-highlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            Back to top<span aria-hidden="true"> ↑</span>
+            {dict.footer.backToTop}
+            <span aria-hidden="true"> ↑</span>
           </a>
         </div>
       </div>

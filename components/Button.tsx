@@ -19,6 +19,7 @@ type ButtonAsButtonProps = ButtonCommonProps & {
 type ButtonAsLinkProps = ButtonCommonProps & {
   href: string;
   external?: boolean;
+  externalLabel?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -47,7 +48,7 @@ export default function Button(props: ButtonProps) {
           rel="noopener noreferrer"
         >
           {children}
-          <span className="sr-only"> (opens in a new tab)</span>
+          <span className="sr-only">{props.externalLabel ?? " (opens in a new tab)"}</span>
         </a>
       );
     }

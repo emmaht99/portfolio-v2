@@ -1,5 +1,8 @@
 "use client";
 
+import type { Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+
 export type ProjectFilterCategory =
   | "All"
   | "UX Design"
@@ -19,18 +22,24 @@ type ProjectFiltersProps = {
   selected: ProjectFilterCategory;
   onChange: (category: ProjectFilterCategory) => void;
   resultCount?: number;
+  locale: Locale;
 };
 
 export default function ProjectFilters({
   selected,
   onChange,
   resultCount,
+  locale,
 }: ProjectFiltersProps) {
+  const dict = getDictionary(locale);
+  const categoryLabel = (category: ProjectFilterCategory) =>
+    category === "All" ? dict.work.all : dict.work.categories[category];
+
   return (
     <div>
       <div
         role="group"
-        aria-label="Filter projects by category"
+        aria-label={dict.work.filterAriaLabel}
         className="flex flex-wrap gap-2"
       >
         {projectFilterCategories.map((category) => {
@@ -47,7 +56,7 @@ export default function ProjectFilters({
                   : "border border-neutral/30 text-ink"
               }`}
             >
-              {category}
+              {categoryLabel(category)}
             </button>
           );
         })}
@@ -55,7 +64,9 @@ export default function ProjectFilters({
 
       <div aria-live="polite" className="sr-only">
         {resultCount !== undefined
-          ? `${resultCount} project${resultCount === 1 ? "" : "s"} found`
+          ? resultCount === 1
+            ? dict.work.resultsFoundOne
+            : dict.work.resultsFoundOther.replace("{count}", String(resultCount))
           : null}
       </div>
     </div>
